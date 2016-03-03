@@ -2,13 +2,6 @@
  * 0.0.1
  *
  *
- *
- *
- *
- *
- *
- *
- *
  */
 
 (function(window,document){
@@ -109,6 +102,7 @@
 (function(window,document){
     "use strict";
     /*! onloadCSS: adds onload support for asynchronous stylesheets loaded with loadCSS. [c]2016 @zachleat, Filament Group, Inc. Licensed MIT */
+    /* https://github.com/filamentgroup/loadCSS */
     /* global navigator */
     /* exported onloadCSS */
     function onloadCSS( ss, callback ) {

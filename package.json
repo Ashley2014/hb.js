@@ -1,0 +1,9 @@
+{
+  "name": "hb.js",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "weui": "^0.4.0"
+  }
+}
