@@ -23,7 +23,6 @@
 *
  */
 
-
 (function(window,document){
     "use strict";
     var w=window;
@@ -98,6 +97,9 @@
     haloBear.loadCSS=loadCSS;
 }(window,document,undefined));
 
+    /*
+     * lib onloadCSS
+     */
 
 (function(window,document){
     "use strict";
@@ -134,7 +136,9 @@
     haloBear.onloadCSS=onloadCSS;
 }(window,document,undefined));
 
-
+    /*
+     * lib
+     */
     (function(window,document){
         "use strict";
         var lib=(function(){
@@ -143,15 +147,28 @@
         haloBear.lib=lib;
     }(window,document,undefined));
 
+
+    /*
+     * weiui
+     */
     (function(window,document,undefined){
         "use strict";
         var weui=(function(){
             var _alert=function(options){
-                var defaults = {
-                    title:'提示',
-                    content:'提示'
-                };
+                if(typeof options=="string"){
+                    var defaults = {
+                        title:'提示',
+                        content:options
+                    };
+                }else{
+                    var defaults = {
+                        title:'提示',
+                        content:'提示内容'
+                    };
+                }
                 var settings = $.extend( {},defaults, options );
+
+
                 var alertHtmlStr='' +
                     '<div class="weui_dialog_alert" >'+
                     '<div class="weui_mask"></div>'+
@@ -179,11 +196,18 @@
 
             var _confirm=function(options){
                 var deferred = $.Deferred();
+                if(typeof options=="string"){
+                    var defaults = {
+                        title:'提示',
+                        content:options
+                    };
+                }else{
+                    var defaults = {
+                        title:'提示',
+                        content:'提示内容'
+                    };
+                }
 
-                var defaults = {
-                    title:'提示',
-                    content:'您确定吗'
-                };
                 var settings = $.extend( {},defaults, options );
                 var confirmHtmlStr='' +
                     '<div class="weui_dialog_confirm">' +
@@ -322,8 +346,54 @@
 
 
 
+    /*
+     *
+     * color
+     */
+
+(function(window,document){
+    "use strict";
+    var color=(function(){
+        return{};
+    }());
+    haloBear.color=color;
+}(window,document,undefined));
+
+    /*
+     *
+     * 16进制色值转rgb
+     */
+(function(window,document){
+    "use strict";
+    function hexToRgb(hex,isString) {
+        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        if(!isString){
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }else{
+            return result ? `rgb(${parseInt(result[1], 16)},${parseInt(result[2], 16)},${parseInt(result[3], 16)})`
+             : null;
+        }
+
+    }
+
+    haloBear.color.hexToRgb=hexToRgb;
+}(window,document,undefined));
 
 
+    /*
+     *
+     * util
+     */
     (function(window,document){
     "use strict";
     var util=(function(){
@@ -332,9 +402,19 @@
     haloBear.util=util;
 }(window,document,undefined));
 
+    /*
+     *
+     * 反序列化数据
+     * a=1&b=2  =》 {a:1,b:2}
+     *
+     *
+     */
     (function(window,document,undefined) {
         "use strict";
         var QueryStringToHash = function QueryStringToHash (query) {
+            if(!query){
+                return {};
+            }
             var query_string = {};
             var vars = query.split("&");
             for (var i=0;i<vars.length;i++) {
@@ -360,8 +440,90 @@
     })(window, document);
 
 
+    /*
+     *
+     * 隐藏虚拟键盘
+     */
+    (function(window,document,undefined) {
+        "use strict";
+        var hideKeyboard = function() {
+            document.activeElement.blur();
+            $("input").blur();
+        };
+        haloBear.util.hideKeyboard=hideKeyboard;
+    })(window, document);
+    /*
+     *
+     * 数字加逗号
+     */
+    (function(window,document,undefined) {
+        "use strict";
+        /*
+         *
+         * 数字加逗号
+
+         */
+        var formatNumber = function(n) {
+            var numberWithCommas,wanN;
+            if(n>9999){
+                wanN=n/10000
+            }
+
+            numberWithCommas=function(x) {
+                var parts = x.toString().split(".");
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                parts[1]&&(parts[1]=parts[1].substr(0,1));
+                return parts.join(".");
+            };
+
+            //if(n>9999){
+            //    //console.log(numberWithCommas(wanN),'万');
+            //
+            //
+            //    return numberWithCommas(wanN)+'万';
+            //}
+
+            return numberWithCommas(n)
+
+        };
+        haloBear.util.formatNumber=formatNumber;
+    })(window, document);
+
+    /*
+     hb.util.loading
+     require spin.js
+     */
+    (function(window,document,undefined) {
+        "use strict";
+
+        var loading=(function(){
+            var loadingHtmlStr=`
+            <div style="position: fixed;z-index: 9999999;width: 100%;height: 100%;left: 0;top: 0;background: rgba(0,0,0,0.2);"></div>
+            `;
+            var $loadingHtml=$(loadingHtmlStr);
+
+            var target = $loadingHtml.get()[0];
+            var spinner = new Spinner().spin(target);
+
+            var show=function(){
+                $("body").append($loadingHtml);
+            };
+            var hide=function(){
+                $loadingHtml.remove();
+            };
+
+            return{
+                show:show,
+                hide:hide
+            }
+        }());
+        haloBear.util.loading=loading;
+    })(window, document);
 
 
+/*
+ hb.location
+ */
 (function(window,document,undefined){
     "use strict";
     var location=(function(){
@@ -666,6 +828,174 @@
 
 
 /*
+ *  Cookies
+ *  修改covert，window 改hb,默认编码改为 encodeURIComponent，
+ *  hb.Cookies
+ *
+ *
+ * JavaScript Cookie v2.1.0
+ * https://github.com/js-cookie/js-cookie
+ *
+ * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+ * Released under the MIT license
+ */
+(function(window, document,undefined){
+    "use strict";
+
+
+    (function (factory) {
+        if (typeof define === 'function' && define.amd) {
+            define(factory);
+        } else if (typeof exports === 'object') {
+            module.exports = factory();
+        } else {
+            var _OldCookies = haloBear.Cookies;
+            var api = haloBear.Cookies = factory();
+            api.noConflict = function () {
+                haloBear.Cookies = _OldCookies;
+                return api;
+            };
+        }
+    }(function () {
+        function extend () {
+            var i = 0;
+            var result = {};
+            for (; i < arguments.length; i++) {
+                var attributes = arguments[ i ];
+                for (var key in attributes) {
+                    result[key] = attributes[key];
+                }
+            }
+            return result;
+        }
+
+        function init (converter) {
+            function api (key, value, attributes) {
+                var result;
+
+                // Write
+
+                if (arguments.length > 1) {
+                    attributes = extend({
+                        path: '/'
+                    }, api.defaults, attributes);
+
+                    if (typeof attributes.expires === 'number') {
+                        var expires = new Date();
+                        expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+                        attributes.expires = expires;
+                    }
+
+                    try {
+                        result = JSON.stringify(value);
+                        if (/^[\{\[]/.test(result)) {
+                            value = result;
+                        }
+                    } catch (e) {}
+
+                    if (!converter.write) {
+                        value = encodeURIComponent(String(value))
+                            .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+                    } else {
+                        value = converter.write(value, key);
+                    }
+
+                    key = encodeURIComponent(String(key));
+                    key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+                    key = key.replace(/[\(\)]/g, escape);
+
+                    return (document.cookie = [
+                        key, '=', value,
+                        attributes.expires && '; expires=' + attributes.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
+                        attributes.path    && '; path=' + attributes.path,
+                        attributes.domain  && '; domain=' + attributes.domain,
+                        attributes.secure ? '; secure' : ''
+                    ].join(''));
+                }
+
+                // Read
+
+                if (!key) {
+                    result = {};
+                }
+
+                // To prevent the for loop in the first place assign an empty array
+                // in case there are no cookies at all. Also prevents odd result when
+                // calling "get()"
+                var cookies = document.cookie ? document.cookie.split('; ') : [];
+                var rdecode = /(%[0-9A-Z]{2})+/g;
+                var i = 0;
+
+                for (; i < cookies.length; i++) {
+                    var parts = cookies[i].split('=');
+                    var name = parts[0].replace(rdecode, decodeURIComponent);
+                    var cookie = parts.slice(1).join('=');
+
+                    if (cookie.charAt(0) === '"') {
+                        cookie = cookie.slice(1, -1);
+                    }
+
+                    try {
+                        cookie = converter.read ?
+                            converter.read(cookie, name) : converter(cookie, name) ||
+                        cookie.replace(rdecode, decodeURIComponent);
+
+                        if (this.json) {
+                            try {
+                                cookie = JSON.parse(cookie);
+                            } catch (e) {}
+                        }
+
+                        if (key === name) {
+                            result = cookie;
+                            break;
+                        }
+
+                        if (!key) {
+                            result[name] = cookie;
+                        }
+                    } catch (e) {}
+                }
+
+                return result;
+            }
+
+            api.get = api.set = api;
+            api.getJSON = function () {
+                return api.apply({
+                    json: true
+                }, [].slice.call(arguments));
+            };
+            api.defaults = {};
+
+            api.remove = function (key, attributes) {
+                api(key, '', extend(attributes, {
+                    expires: -1
+                }));
+            };
+
+            api.withConverter = init;
+
+            return api;
+        }
+
+        return init(function () {});
+    }));
+
+    haloBear.Cookies.withConverter({
+        write: function (value) {
+            return encodeURIComponent(value);
+        },
+        read: function (value) {
+            return decodeURIComponent(value);
+        }
+    });
+
+
+}(window, document));
+
+
+/*
  browser
 
  */
@@ -727,7 +1057,13 @@
     haloBear.agent.browser=browser;
 }(window, document));
 
+
+
+
+
+
     window.hb=window.haloBear=haloBear;
 }(window,document,undefined));
+
 
 
