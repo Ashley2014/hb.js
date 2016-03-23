@@ -1,5 +1,5 @@
 /*
- * 0.0.2
+ * 0.0.3
  *
  *
  */
@@ -154,7 +154,7 @@
     (function(window,document,undefined){
         "use strict";
         var weui=(function(){
-            var _alert=function(options){
+            var _alert=function(options,callback){
                 if(typeof options=="string"){
                     var defaults = {
                         title:'提示',
@@ -190,6 +190,9 @@
                 $alertHtml.find(".weui_dialog").fadeIn(200);
                 var $confirmBt=$alertHtml.find(".weui_btn_dialog");
                 $confirmBt.on('click',function(){
+                    if(callback){
+                        callback();
+                    }
                     $alertHtml.remove();
                 });
             };
@@ -497,6 +500,10 @@
         "use strict";
 
         var loading=(function(){
+            //console.log(typeof Spinner=='undefined')
+            if(typeof Spinner=='undefined'){
+                return {}
+            }
             var loadingHtmlStr=`
             <div style="position: fixed;z-index: 9999999;width: 100%;height: 100%;left: 0;top: 0;background: rgba(0,0,0,0.2);"></div>
             `;
