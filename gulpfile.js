@@ -47,6 +47,7 @@ gulp.task('less', function () {
 gulp.task('babel', function () {
     return gulp.src('hb.js')
         //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
         .pipe(plugins.babel({
             presets: ['es2015']
         }))
