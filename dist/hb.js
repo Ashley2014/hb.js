@@ -1501,7 +1501,6 @@
 
 
 
-
     /*
      setInterval
 
@@ -1509,6 +1508,7 @@
     (function(window, document,undefined){
         "use strict";
         var interval=function(fun,delay,count,afterCount){
+
             if(count){
                 var refreshIntervalId = setInterval(intervalFunWithCount, delay);
             }else{
@@ -1520,7 +1520,7 @@
             };
 
             function intervalFun(){
-                count=count--;
+                count--;
                 fun();
             }
 
