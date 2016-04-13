@@ -752,13 +752,38 @@
                     }
                 };
 
-                guideShare=guide('http://7jptwn.com2.z0.glb.qiniucdn.com/weixin-guide-share.png');
-                var os=haloBear.agent.os();
-                if(os=='ios'){
-                    guideDownload=guide('http://7jptwn.com2.z0.glb.qiniucdn.com/weixin-guide-download-ios.png');
-                }else{
-                    guideDownload=guide('http://7jptwn.com2.z0.glb.qiniucdn.com/weixin-guide-download-android.png');
-                }
+
+
+                guideShare=(function(){
+                    var _guide;
+                    return{
+                        show:function(){
+                            _guide?_guide.show():_guide=guide('http://7jptwn.com2.z0.glb.qiniucdn.com/weixin-guide-share.png').show();
+                        },
+                        hide:function(){
+                            _guide?_guide.hide():_guide=guide('http://7jptwn.com2.z0.glb.qiniucdn.com/weixin-guide-share.png').hide();
+                        }
+                    }
+                }());
+
+
+                guideDownload=(function(){
+                    var _guide;
+                    var os=haloBear.agent.os();
+                    if(os=='ios'){
+                        var imgUrl='http://7jptwn.com2.z0.glb.qiniucdn.com/weixin-guide-download-ios.png';
+                    }else{
+                        var imgUrl='http://7jptwn.com2.z0.glb.qiniucdn.com/weixin-guide-download-android.png';
+                    }
+                    return{
+                        show:function(){
+                            _guide?_guide.show():_guide=guide(imgUrl).show();
+                        },
+                        hide:function(){
+                            _guide?_guide.show():_guide=guide(imgUrl).hide();
+                        }
+                    }
+                }());
 
 
 
