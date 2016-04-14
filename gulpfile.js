@@ -5,6 +5,11 @@ var plugins = gulpLoadPlugins();
 var rubySass = require('gulp-ruby-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var fs = require('fs');
+var merge = require('merge-stream');
+var imageminOptipng = require('imagemin-optipng');
+var buffer = require('vinyl-buffer');
+var imageminPngquant = require('imagemin-pngquant');
+var imageminZopfli = require('imagemin-zopfli');
 //var browserSync = require('browser-sync').create();
 //var devip = require('dev-ip');
 //console.log(devip());
@@ -44,6 +49,8 @@ gulp.task('less', function () {
         .pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('app/Public/College/css/'));
 });
+
+
 gulp.task('babel', function () {
     return gulp.src('hb.js')
         //.pipe(sourcemaps.init())
@@ -63,7 +70,37 @@ gulp.task('babel', function () {
 //        .pipe(gulp.dest('app/vendor/bootstrap-sass-3.3.5/assets/stylesheets/'));
 //});
 
+gulp.task('sprite', function () {
+    var spriteData = gulp.src('ieupdate/app/images/*_8.png').pipe(plugins.spritesmith({
+        imgName: 'ieupdate_s.png',
+        cssName: 'sprite.css',
+        imgPath  : '../images/ieupdate_s.png',
+        cssVarMap: function (sprite) {
+            sprite.name = 'ieupdate_' + sprite.name;
+        }
+    }));
 
+    // Pipe image stream through image optimizer and onto disk
+
+
+    var imgStream = spriteData.img
+        // DEV: We must buffer our stream into a Buffer for `imagemin`
+        .pipe(buffer())
+        .pipe(plugins.imagemin({
+            optimizationLevel: 2,
+
+        }))
+        .pipe(imageminPngquant({posterize: 1})())
+        .pipe(gulp.dest('ieupdate/dist/images'));
+
+    // Pipe CSS stream through CSS optimizer and onto disk
+    var cssStream = spriteData.css
+        .pipe(gulp.dest('ieupdate/dist/css'));
+
+    // Return a merged stream to handle both `end` events
+    return merge(imgStream, cssStream);
+    //return spriteData.pipe(gulp.dest('ieupdate/dist'))
+});
 
 gulp.task('styles',['sass','less'], function () {
 
