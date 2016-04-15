@@ -70,11 +70,21 @@ gulp.task('babel', function () {
 //        .pipe(gulp.dest('app/vendor/bootstrap-sass-3.3.5/assets/stylesheets/'));
 //});
 
-gulp.task('sprite', function () {
+gulp.task('typescript', function () {
+    return gulp.src('hb.ieupdate.ts')
+        .pipe(plugins.typescript())
+        .pipe(gulp.dest('ieupdate/dist/js'))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.ieupdate.min.js"))
+        .pipe(gulp.dest('ieupdate/dist/js'));
+});
+
+
+gulp.task('ieupdate',['typescript'], function () {
     var spriteData = gulp.src('ieupdate/app/images/*_8.png').pipe(plugins.spritesmith({
         imgName: 'ieupdate_s.png',
         cssName: 'sprite.css',
-        imgPath  : '../images/ieupdate_s.png',
+        imgPath  : 'http://7xopel.com2.z0.glb.qiniucdn.com/serarch/ieupdate_s.png',
         cssVarMap: function (sprite) {
             sprite.name = 'ieupdate_' + sprite.name;
         }
@@ -101,6 +111,7 @@ gulp.task('sprite', function () {
     return merge(imgStream, cssStream);
     //return spriteData.pipe(gulp.dest('ieupdate/dist'))
 });
+
 
 gulp.task('styles',['sass','less'], function () {
 
@@ -483,7 +494,7 @@ gulp.task('clean', require('del').bind(null, [ 'dist']));
 
 
 gulp.task('default', ['clean'], function(){
-    gulp.start('babel');
+    gulp.start(['babel','ieupdate']);
 });
 
 

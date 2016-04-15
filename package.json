@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "gulp-imagemin": "^2.4.0",
+    "gulp-typescript": "^2.13.0",
     "gulp.spritesmith": "^6.2.1",
     "merge-stream": "^1.0.0",
     "vinyl-buffer": "^1.0.0"
