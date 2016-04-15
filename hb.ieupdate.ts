@@ -149,79 +149,84 @@
 
     `;
 
-    style.type = 'text/css';
-    if (style.styleSheet){
-        style.styleSheet.cssText = css;
-    } else {
-        style.appendChild(document.createTextNode(css));
-    }
+    function renderDom(){
 
-    head.appendChild(style);
-    document.getElementsByTagName("body")[0].innerHTML = htmlStr;
-
-    //  alert(navigator.userAgent);
-    function IECompatibility() {
-        var agentStr = navigator.userAgent;
-        this.IsIE = false;
-        this.IsOn = undefined;  //defined only if IE
-        this.Version = undefined;
-        if (agentStr.indexOf("MSIE 7.0") > -1) {
-            this.IsIE = true;
-            this.IsOn = true;
-            if (agentStr.indexOf("Trident/6.0") > -1) {
-                this.Version = 'IE10';
-            } else if (agentStr.indexOf("Trident/5.0") > -1) {
-                this.Version = 'IE9';
-            } else if (agentStr.indexOf("Trident/4.0") > -1) {
-                this.Version = 'IE8';
-            } else {
-                this.IsOn = false; // compatability mimics 7, thus not on
-                this.Version = 'IE7';
-            }
-        } //IE 7
-    }
-    var iev = new IECompatibility();
-    //  alert(iev.Version);
-    var ie=document.getElementById("ie");
-    var iec=document.getElementById("iec");
-    if(iev.Version){
-        if(iev.Version!='ie7'||iev.Version!='ie8'){
-            ie.style.display="none";
-            iec.style.display="block";
+        style.type = 'text/css';
+        if (style.styleSheet){
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(document.createTextNode(css));
         }
-    }
 
+        head.appendChild(style);
+        document.getElementsByTagName("body")[0].innerHTML = htmlStr;
 
-    function hideIeWhenXp() {
-        var xp=document.getElementById("xp");
-        xp.style.display="none";
-    }
-    function detectOS() {
-        var sUserAgent = navigator.userAgent;
-        //alert(sUserAgent);
-
-        var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");
-        if (isWin) {
-            var isWin2K = sUserAgent.indexOf("Windows NT 5.0") > -1 || sUserAgent.indexOf("Windows 2000") > -1;
-            if (isWin2K) {
-                hideIeWhenXp();
-            }
-            var isWinXP = sUserAgent.indexOf("Windows NT 5.1") > -1 || sUserAgent.indexOf("Windows XP") > -1;
-            if (isWinXP) {
-                hideIeWhenXp();
-            }
-            var isWin2003 = sUserAgent.indexOf("Windows NT 5.2") > -1 || sUserAgent.indexOf("Windows 2003") > -1;
-            if (isWin2003) {
-                hideIeWhenXp();
+        //  alert(navigator.userAgent);
+        function IECompatibility() {
+            var agentStr = navigator.userAgent;
+            this.IsIE = false;
+            this.IsOn = undefined;  //defined only if IE
+            this.Version = undefined;
+            if (agentStr.indexOf("MSIE 7.0") > -1) {
+                this.IsIE = true;
+                this.IsOn = true;
+                if (agentStr.indexOf("Trident/6.0") > -1) {
+                    this.Version = 'IE10';
+                } else if (agentStr.indexOf("Trident/5.0") > -1) {
+                    this.Version = 'IE9';
+                } else if (agentStr.indexOf("Trident/4.0") > -1) {
+                    this.Version = 'IE8';
+                } else {
+                    this.IsOn = false; // compatability mimics 7, thus not on
+                    this.Version = 'IE7';
+                }
+            } //IE 7
+        }
+        var iev = new IECompatibility();
+        //  alert(iev.Version);
+        var ie=document.getElementById("ie");
+        var iec=document.getElementById("iec");
+        if(iev.Version){
+            if(iev.Version!='ie7'||iev.Version!='ie8'){
+                ie.style.display="none";
+                iec.style.display="block";
             }
         }
-        return "other";
+
+
+        function hideIeWhenXp() {
+            var xp=document.getElementById("xp");
+            xp.style.display="none";
+        }
+        function detectOS() {
+            var sUserAgent = navigator.userAgent;
+            //alert(sUserAgent);
+
+            var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");
+            if (isWin) {
+                var isWin2K = sUserAgent.indexOf("Windows NT 5.0") > -1 || sUserAgent.indexOf("Windows 2000") > -1;
+                if (isWin2K) {
+                    hideIeWhenXp();
+                }
+                var isWinXP = sUserAgent.indexOf("Windows NT 5.1") > -1 || sUserAgent.indexOf("Windows XP") > -1;
+                if (isWinXP) {
+                    hideIeWhenXp();
+                }
+                var isWin2003 = sUserAgent.indexOf("Windows NT 5.2") > -1 || sUserAgent.indexOf("Windows 2003") > -1;
+                if (isWin2003) {
+                    hideIeWhenXp();
+                }
+            }
+            return "other";
+        }
+        detectOS();
     }
-    detectOS();
+
 
     var bgImg = new Image();
     bgImg.src = 'http://7xopel.com2.z0.glb.qiniucdn.com/serarch/ieupdate_s.png';
     bgImg.onload = function(){
+        renderDom();
         document.execCommand("Stop");
     };
 
