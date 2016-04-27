@@ -29,17 +29,17 @@ server = http.createServer (req, res) ->
 #  console.log('urlll',params);
   delayTime=1000
   res.setHeader('Access-Control-Allow-Origin', '*');
+
   res.setHeader('Access-Control-Request-Method', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
+#  res.setHeader('Access-Control-Allow-Methods', '*');
   res.setHeader('Access-Control-Allow-Headers', '*');
   if  req.method == 'OPTIONS'
     res.writeHead(200);
     res.end();
 
     return
-
   res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
-#  res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
+#  res.writeHead(200, {'Content-Type': 'application/javascript; charset=utf-8'});
 
   #  switch req.url
   switch params.pathname
@@ -1008,6 +1008,8 @@ server = http.createServer (req, res) ->
 
     when "/file/upload", "/workspace/uploadImage", "/file/version/upload"
       console.log "dddd"
+#      res.setHeader('Content-Type','application/json');
+#      res.writeHead(200, {'Content-Type': 'text/json; charset=utf-8'});
       if req.method.toLowerCase()=='post'
         do->
 #          chunk = '';
@@ -1039,7 +1041,8 @@ server = http.createServer (req, res) ->
 #              res.end()
 
             setTimeout ->
-              res.write('a' + '(' + JSON.stringify(data) + ')');
+#              res.write('a' + '(' + JSON.stringify(data) + ')');
+              res.write(JSON.stringify(data));
 #              if params.query && params.query.callback
 #                res.write(params.query.callback + '(' + JSON.stringify(data) + ')');
 #              else
