@@ -13,7 +13,7 @@
 </head>
 <body ng-controller="main">
 
-<div id="wrapper" hb-ellipsis e-val="t" >
+<div id="wrapper" hb-ellipsis hb-ellipsis-val="t" >
     {{t}}
 </div>
 
@@ -30,7 +30,7 @@
         }])
         .directive('hbEllipsis',function(){
             var linkFunction=function($scope, $element, $attrs){
-                $scope.$watch('eVal',function(val) {
+                $scope.$watch('hbEllipsisVal',function(val) {
                     if (val) {
                         $element.ellipsis()
                     }
@@ -39,7 +39,7 @@
             return{
                 restrict: 'AE',
                 scope: {
-                    eVal:'='
+                    hbEllipsisVal:'='
                 },
                 link:linkFunction
             }
