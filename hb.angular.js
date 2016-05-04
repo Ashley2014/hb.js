@@ -6,6 +6,8 @@
         .controller('hbQiniuFileUploadController', [
             '$scope', '$element', '$attrs', '$window',
             function ($scope, $element, $attrs, $window) {
+                var qiniuVm;
+                $scope.qiniuVm=qiniuVm={};
 
                 var $bt=$element.find('[hb-qiniu-file-upload-bt]');
                 var $btContainer=$element.find('[hb-qiniu-file-upload-bt-container]');
@@ -42,6 +44,12 @@
                         },
                         'UploadProgress': function(up, file) {
                             // 每个文件上传时,处理相关的事情
+                            //console.log('UploadProgress',up.total.percent);
+                                $scope.$apply(function(){
+
+                                    qiniuVm.progress=up.total.percent;
+                                    //console.log(qiniuVm.progress);
+                                });
                         },
                         'FileUploaded': function(up, file, info) {
                             // 每个文件上传成功后,处理相关的事情
@@ -60,18 +68,21 @@
                             //上传出错时,处理相关的事情
                         },
                         'UploadComplete': function() {
-                            console.log('UploadComplete')
+                            //console.log('UploadComplete')
                             //队列文件处理完毕后,处理相关的事情
                         },
                         'Key': function(up, file) {
                             // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
                             // 该配置必须要在 unique_names: false , save_key: false 时才生效
 
-                            var key = "";
+                            //var key = "";
                             // do something with key here
-                            return key
+                            //return key
                         }
                     }
+                };
+                var optInit={
+
                 };
 
 
@@ -89,9 +100,25 @@
                     $attrs.hbQiniuFileUpload,
                     function (newOptions) {
                         //console.log(newOptions);
-                        var newOptCopy=angular.copy(newOptions);
-                        var newOpt=angular.extend(opt, newOptCopy);
+                        var newOptCopy={};
+                        var newOptInitCopy={};
+                        angular.forEach(newOptions, function(value, key) {
+                            //this.push(key + ': ' + value);
+                            //console.log(key)
+                            if(key=='init'){
+                                //console.log(value)
+                                newOptInitCopy=angular.copy(value);
+                            }else{
+                                newOptCopy[key]=value;
+                            }
+                        });
 
+                        //console.log(newOptCopy.init);
+                        var newOpt=angular.extend(opt, newOptCopy);
+                        //console.log(opt.init);
+                        //console.log(newOptInitCopy);
+                        newOpt.init=angular.extend(opt.init, newOptInitCopy);
+                        //console.log(opt.init);
                         if (newOptions) {
                             var uploader = Qiniu.uploader(newOpt);
                             //console.log(uploader);
