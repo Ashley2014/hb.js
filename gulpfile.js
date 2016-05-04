@@ -51,7 +51,7 @@ gulp.task('less', function () {
 });
 
 
-gulp.task('babel', function () {
+gulp.task('hb.js', function () {
     return gulp.src('hb.js')
         //.pipe(sourcemaps.init())
         .pipe(gulp.dest('dist'))
@@ -60,6 +60,30 @@ gulp.task('babel', function () {
         }))
         .pipe(plugins.uglify())
         .pipe(plugins.rename("hb.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('hb.angular', function () {
+    return gulp.src('hb.angular.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.angular.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('hb.jquery', function () {
+    return gulp.src('hb.jquery.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.jquery.min.js"))
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
@@ -493,7 +517,7 @@ gulp.task('clean', require('del').bind(null, [ 'dist']));
 
 
 gulp.task('default', ['clean'], function(){
-    gulp.start(['babel','ieupdate']);
+    gulp.start(['hb.js','ieupdate','hb.angular','hb.jquery']);
 });
 
 
