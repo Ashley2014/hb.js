@@ -32,13 +32,19 @@ server = http.createServer (req, res) ->
 
   res.setHeader('Access-Control-Request-Method', '*');
 #  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization');
+#  res.setHeader('Access-Control-Allow-Headers', '*');
+#  res.addTrailers('Authorization');
+  #  res.addHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
   if  req.method == 'OPTIONS'
     res.writeHead(200);
     res.end();
 
     return
   res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
+
+#  res.writeHead(200, {'Content-Type': 'application/json'});
 #  res.writeHead(200, {'Content-Type': 'application/javascript; charset=utf-8'});
 
   #  switch req.url
@@ -1042,6 +1048,11 @@ server = http.createServer (req, res) ->
 
             setTimeout ->
 #              res.write('a' + '(' + JSON.stringify(data) + ')');
+
+#              res.write('{"height":"3642","url":"http://7kttnj.com2.z0.glb.qiniucdn.com/avatar/temp/201605/03/Fji-cm4_ej1sVvNmQX9WPv0UICa3.jpg","width":"1920"}');
+#              res.write('<textarea data-type="application/json">
+#                          {"ok": true, "message": "Thanks so much"}
+#                        </textarea>');
               res.write(JSON.stringify(data));
 #              if params.query && params.query.callback
 #                res.write(params.query.callback + '(' + JSON.stringify(data) + ')');
@@ -1074,7 +1085,11 @@ server = http.createServer (req, res) ->
         "message":"文件上传：传输错误"
         "data":""
       setTimeout ->
-        res.write(params.query.callback + '(' + JSON.stringify(data) + ')');
+        res.write(JSON.stringify(data));
+#        res.write('<textarea data-type="application/json">
+#                          {"ok": false, "message": "error"}
+#                        </textarea>');
+#        res.write(params.query.callback + '(' + JSON.stringify(data) + ')');
 #        res.write(params.query.callback + '(' + JSON.stringify(data) + ')');
 #        if params.query && params.query.callback
 #          res.write(params.query.callback + '(' + JSON.stringify(data) + ')');
