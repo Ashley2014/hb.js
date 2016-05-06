@@ -49,6 +49,7 @@
     "imagemin-optipng": "^4.3.0",
     "imagemin-pngquant": "^4.2.2",
     "imagemin-zopfli": "^4.2.0",
+    "iscroll": "^5.2.0",
     "jquery": "^2.2.3",
     "lodash": "^4.11.2",
     "merge-stream": "^1.0.0",
