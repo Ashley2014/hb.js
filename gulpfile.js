@@ -112,14 +112,17 @@ gulp.task('hb.angular.pack', function () {
         'node_modules/angular-ui-router/release/angular-ui-router.js',
     ])
         //.pipe(sourcemaps.init())
-        .pipe(plugins.uglify())
         .pipe(plugins.concat('hb.angular.pack.js'))
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.uglify())
         .pipe(plugins.header(banner))
         .pipe(plugins.rename("hb.angular.pack.min.js"))
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
-
+gulp.task('lib', function(){
+    gulp.start(['hb.angular.pack']);
+});
 
 
 //gulp.task('rubySass', function () {
