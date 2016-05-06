@@ -75,6 +75,8 @@ gulp.task('hb.angular', function () {
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
+
+
 gulp.task('hb.jquery', function () {
     return gulp.src('hb.jquery.js')
         //.pipe(sourcemaps.init())
@@ -87,6 +89,38 @@ gulp.task('hb.jquery', function () {
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
+
+
+
+gulp.task('hb.angular.pack', function () {
+    var timestamp=new Date().getTime();
+    var banner = `/**
+     * timestamp: ${timestamp}
+     * 1.5.5 angular,angular-animate,angular-messages,angular-resource,angular-sanitize,angular-touch
+     * 0.2.18 angular-ui-router
+     * 1.3.2 ui-bootstrap.tpl
+     */\n`;
+
+    return gulp.src([
+        'node_modules/angular/angular.js',
+        'node_modules/angular-animate/angular-animate.js',
+        'node_modules/angular-messages/angular-messages.js',
+        'node_modules/angular-resource/angular-resource.js',
+        'node_modules/angular-sanitize/angular-sanitize.js',
+        'node_modules/angular-touch/angular-touch.js',
+        'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.tpl.js',
+        'node_modules/angular-ui-router/release/angular-ui-router.js',
+    ])
+        //.pipe(sourcemaps.init())
+        .pipe(plugins.uglify())
+        .pipe(plugins.concat('hb.angular.pack.js'))
+        .pipe(plugins.header(banner))
+        .pipe(plugins.rename("hb.angular.pack.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
+
+
 
 //gulp.task('rubySass', function () {
 //    return rubySass('app/vendor/bootstrap-sass-3.3.5/assets/stylesheets/bootstrap.scss',{ sourcemap: true })
