@@ -1,8 +1,7 @@
 (function () {
     'use strict';
-    angular.module('hb.modules', ['hb.qiniuSdk']);
+    angular.module('hb.modules', ['hb.qiniuSdk','hb.iscroll']);
     angular.module('hb.qiniuSdk', [])
-
         .controller('hbQiniuFileUploadController', [
             '$scope', '$element', '$attrs', '$window',
             function ($scope, $element, $attrs, $window) {
@@ -137,9 +136,60 @@
             };
         })
 
+    ;
+    angular.module('hb.iscroll', [])
+        .controller('hbIscrollController', [
+            '$scope', '$element', '$attrs', '$window',
+            function ($scope, $element, $attrs, $window) {
+
+                var iscrollVm;
+                var opt={};
+                var myScroll={};
+
+                $scope.iscrollVm=iscrollVm={};
+
+                console.log('iscroll')
+                // Observe option changes:
+                $scope.$watch(
+                    'hbIscroll',
+                    function (newOptions) {
+                        console.log(newOptions)
+                        var newOptCopy=newOptions;
+                        var newOpt=angular.extend({},opt, newOptCopy);
+                        //console.log(newOptions);
+                        myScroll = new IScroll($element.get()[0],newOpt);
 
 
+                        myScroll.on('scrollStart', function(){
+                            console.log('scrollStart');
 
+
+                        });
+                        myScroll.on('scrollEnd', function(){
+                            console.log('scrollEnd');
+                            if (this.y - this.maxScrollY<300){
+                                $scope.hbIscrollBottom();
+                            }
+
+                        });
+
+                    }
+                );
+
+
+            }
+        ])
+
+        .directive('hbIscroll', function () {
+            return {
+                controller: 'hbIscrollController',
+                scope: {
+                    hbIscroll:"=",
+                    hbIscrollBottom:"&"
+                }
+            };
+        })
+    ;
 
 
 

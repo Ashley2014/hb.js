@@ -19,19 +19,34 @@
 //                bounceTime: 1200
             });
             var loading='<li>loading..</li>';
+            var fakeli='<li>fakeli</li>';
             var $loading=$(loading);
 
             myScroll.on('scrollStart', function(){
-                console.log('scrollStart');
+                console.log('scrollStart',this.directionY);
+                console.log(this.y,this.maxScrollY);
                 $("#ul").prepend($loading);
+//                for(var i=0;i<5;i++){
+//                    $("#ul").prepend(fakeli);
+//                    $("#ul").append(fakeli);
+//                }
+
                 $.ajax('/fakeapi').done(function(res){
-                    console.log(res);
+                    console.log('success');
                     $loading.remove();
                 })
             });
             myScroll.on('scrollEnd', function(){
-                console.log('scrollEnd');
-
+                console.log('scrollEnd',this.directionY);
+                console.log(this.y,this.maxScrollY);
+                if (this.y == 0)
+                    $("#begin").show();
+                if (this.y < 0)
+                    $("#begin").hide();
+                if (this.y == this.maxScrollY)
+                    $("#end").show();
+                if (this.y > this.maxScrollY)
+                    $("#end").hide();
             });
 
 
