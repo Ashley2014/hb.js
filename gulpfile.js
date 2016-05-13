@@ -10,6 +10,11 @@ var imageminOptipng = require('imagemin-optipng');
 var buffer = require('vinyl-buffer');
 var imageminPngquant = require('imagemin-pngquant');
 var imageminZopfli = require('imagemin-zopfli');
+var gutil = require("gulp-util");
+var webpack = require("webpack");
+var webpackStream = require('webpack-stream');
+var WebpackDevServer = require("webpack-dev-server");
+
 //var browserSync = require('browser-sync').create();
 //var devip = require('dev-ip');
 //console.log(devip());
@@ -150,6 +155,67 @@ gulp.task('hb.jquery.angular.pack', function () {
         .pipe(plugins.rename(`hb.jquery.angular.pack.min.${vision}.js`))
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task("hb.account", function(callback) {
+    // run webpack
+    var webpackConfig=require('./hb.account/webpack.config.js');
+    return gulp.src('hb.account/entry.js')
+        .pipe(webpackStream( webpackConfig ))
+        .pipe(gulp.dest('hb.account/'));
+
+
+});
+gulp.task("hb.account2", function(callback) {
+    // run webpack
+    var webpackConfig=require('./hb.account/webpack.config.js');
+
+
+    webpack( webpackConfig, function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
+        //gutil.log("[webpack]", "Gonna sit around and watch for file changes. CTRL^C to kill me");
+        //callback();
+    });
+
+});
+
+
+gulp.task("hb.account.dev", function(callback) {
+
+    // run webpack
+    var webpackConfig=require('./hb.account/webpack.config.dev.js');
+
+
+    webpack( webpackConfig, function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
+        //gutil.log("[webpack]", "Gonna sit around and watch for file changes. CTRL^C to kill me");
+        //callback();
+    });
+});
+
+gulp.task("hb.account.dev2", function(callback) {
+    // Start a webpack-dev-server
+    var compiler = webpack(require('./webpack.config.js'));
+
+    new WebpackDevServer(compiler, {
+        // server and middleware options
+        contentBase: "./hb.account",
+        // or: contentBase: "http://localhost/",
+        hot: false
+    }).listen(8080, "localhost", function(err) {
+        if(err) throw new gutil.PluginError("webpack-dev-server", err);
+        // Server listening
+        gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/hb.account.dev/index.html");
+
+        // keep the server alive or continue?
+        // callback();
+    });
 });
 
 
