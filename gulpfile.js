@@ -162,8 +162,10 @@ gulp.task("hb.account", function(callback) {
     var webpackConfig=require('./hb.account/webpack.config.js');
     return gulp.src('hb.account/entry.js')
         .pipe(webpackStream( webpackConfig ))
-        .pipe(gulp.dest('hb.account/'));
-
+        .pipe(gulp.dest('hb.account/'))
+        .pipe(plugins.rename("hb.account.min.js"))
+        .pipe(gulp.dest('dist'))
+    ;
 
 });
 gulp.task("hb.account2", function(callback) {
@@ -655,7 +657,7 @@ gulp.task('clean', require('del').bind(null, [ 'dist']));
 
 
 gulp.task('default', ['clean'], function(){
-    gulp.start(['hb.js','ieupdate','hb.angular','hb.jquery']);
+    gulp.start(['hb.js','ieupdate','hb.angular','hb.jquery','hb.account']);
 });
 
 
