@@ -7,6 +7,9 @@ var $html = $(html);
 var $close = $html.find('[hb-login-close]');
 var $form = $html.find('[hb-login-form]');
 var $error = $html.find('[hb-login-error]');
+var $phone = $html.find('[hb-login-phone]');
+var $password = $html.find('[hb-login-password]');
+
 var bg=`<div class="hb-login-bg"></div>`;
 var $bg=$(bg);
 var options={};
@@ -72,7 +75,34 @@ var  haloAuth=(function() {
     }
 }());
 
-
+//$.fn.hb_login_zIndex=function( zIndex ) {
+//    if ( zIndex !== undefined ) {
+//        return this.css( "zIndex", zIndex );
+//    }
+//
+//    if ( this.length ) {
+//        var elem = $( this[ 0 ] ), position, value;
+//        while ( elem.length && elem[ 0 ] !== document ) {
+//            // Ignore z-index if position is set to a value where z-index is ignored by the browser
+//            // This makes behavior of this function consistent across browsers
+//            // WebKit always returns auto if the element is positioned
+//            position = elem.css( "position" );
+//            if ( position === "absolute" || position === "relative" || position === "fixed" ) {
+//                // IE returns 0 when zIndex is not specified
+//                // other browsers return a string
+//                // we ignore the case of nested elements with an explicit value of 0
+//                // <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
+//                value = parseInt( elem.css( "zIndex" ), 10 );
+//                if ( !isNaN( value ) && value !== 0 ) {
+//                    return value;
+//                }
+//            }
+//            elem = elem.parent();
+//        }
+//    }
+//
+//    return 0;
+//};
 
 
 
@@ -114,22 +144,34 @@ function open(p1,p2,p3){
 
 
 
+
+
+
     $('body').append($bg).append($html);
+    var scrollTop=$(window).scrollTop();
+    var windowH=$(window).height();
+    var elH=$html.outerHeight();
+    $html.css({
+        top:scrollTop+windowH/2-elH/2,
+    });
+
     $bg.on('click',close);
     $close.on('click',close);
     submit=function(event){
         event.preventDefault();
         //console.log('234')
         //deferred = $.Deferred();
+        hb.util.loading.show();
         login({
-            phone: $.trim($("[hb-login-phone]").val()),
-            password: $("[hb-login-password]").val()
+            phone: $.trim($phone.val()),
+            password: $password.val()
         }).done(function(res){
             //return res;
             //console.log(res);
+            hb.util.loading.hide();
             $error.hide();
-            $("[hb-login-phone]").val('');
-            $("[hb-login-password]").val('');
+            $phone.val('');
+            $password.val('');
             haloAuth.setToken(res.data.token);
             haloAuth.setUser(res.data.user);
             close();
@@ -138,6 +180,7 @@ function open(p1,p2,p3){
         }).fail(function(res){
             //return res;
             //console.log(res);
+            hb.util.loading.hide();
             $error.text(res).show();
             callbackError(res);
         });

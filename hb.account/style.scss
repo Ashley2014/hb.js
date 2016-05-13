@@ -43,11 +43,11 @@ $ff_chs_h: Arial,Verdana,Tahoma,'Hiragino Sans GB',Microsoft YaHei,SimHei,SimSun
   width: 374px;
   height: 428px;
   position: absolute;
-  z-index: 1;
+  z-index: 9999+1;
   left: 50%;
-  top: 50%;
+  //top: 50%;
   margin-left: (-374px/2);
-  margin-top: (-428px/2);
+  //margin-top: (-428px/2);
   background: #ffffff;
   padding: 57px 37px 0;
   border-radius: 4px;
@@ -81,7 +81,7 @@ $ff_chs_h: Arial,Verdana,Tahoma,'Hiragino Sans GB',Microsoft YaHei,SimHei,SimSun
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 1;
+    z-index: 9999;
     width: 100%;
     height: 100%;
     background: #000000;
