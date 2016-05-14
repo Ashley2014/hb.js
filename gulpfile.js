@@ -126,6 +126,7 @@ gulp.task('hb.angular.pack', function () {
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
+
 gulp.task('hb.jquery.angular.pack', function () {
     var timestamp=new Date().getTime();
     var vision='1.0.0';
@@ -153,6 +154,28 @@ gulp.task('hb.jquery.angular.pack', function () {
         .pipe(plugins.uglify())
         .pipe(plugins.header(banner))
         .pipe(plugins.rename(`hb.jquery.angular.pack.min.${vision}.js`))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('hb.modernizr.pack', function () {
+    var timestamp=new Date().getTime();
+    var vision='1.0.0';
+    var banner = `/**
+     * timestamp: ${timestamp}
+     * modernizr v3.3.1  no feature
+     * detectizr v2.2.0
+     */\n`;
+    return gulp.src([
+        'modernizr-custom.js',
+        'node_modules/detectizr/dist/detectizr.min.js',
+    ])
+        //.pipe(sourcemaps.init())
+        .pipe(plugins.concat(`hb.modernizr.pack.${vision}.js`))
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.uglify())
+        .pipe(plugins.header(banner))
+        .pipe(plugins.rename(`hb.modernizr.pack.min.${vision}.js`))
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
