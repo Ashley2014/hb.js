@@ -99,9 +99,9 @@ gulp.task('hb.jquery', function () {
 
 gulp.task('hb.angular.pack', function () {
     var timestamp=new Date().getTime();
-    var vision='1.0.0';
+    var version='1.0.0';
     var banner = `/**
-     * timestamp: ${timestamp}
+     * version: ${version}
      * 1.5.5 angular,angular-animate,angular-messages,angular-resource,angular-sanitize,angular-touch
      * 0.2.18 angular-ui-router
      * 1.3.2 ui-bootstrap.tpl
@@ -118,20 +118,20 @@ gulp.task('hb.angular.pack', function () {
         'node_modules/angular-ui-router/release/angular-ui-router.js',
     ])
         //.pipe(sourcemaps.init())
-        .pipe(plugins.concat(`hb.angular.pack.${vision}.js`))
+        .pipe(plugins.concat(`hb.angular.pack.${version}.js`))
         .pipe(gulp.dest('dist'))
         .pipe(plugins.uglify())
         .pipe(plugins.header(banner))
-        .pipe(plugins.rename(`hb.angular.pack.min.${vision}.js`))
+        .pipe(plugins.rename(`hb.angular.pack.min.${version}.js`))
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('hb.jquery.angular.pack', function () {
     var timestamp=new Date().getTime();
-    var vision='1.0.0';
+    var version='1.0.0';
     var banner = `/**
-     * timestamp: ${timestamp}
+     * version: ${version}
      * 2.2.3 jquery
      * 1.5.5 angular,angular-animate,angular-messages,angular-resource,angular-sanitize,angular-touch
      * 0.2.18 angular-ui-router
@@ -149,20 +149,20 @@ gulp.task('hb.jquery.angular.pack', function () {
         'node_modules/angular-ui-router/release/angular-ui-router.js',
     ])
         //.pipe(sourcemaps.init())
-        .pipe(plugins.concat(`hb.jquery.angular.pack.${vision}.js`))
+        .pipe(plugins.concat(`hb.jquery.angular.pack.${version}.js`))
         .pipe(gulp.dest('dist'))
         .pipe(plugins.uglify())
         .pipe(plugins.header(banner))
-        .pipe(plugins.rename(`hb.jquery.angular.pack.min.${vision}.js`))
+        .pipe(plugins.rename(`hb.jquery.angular.pack.min.${version}.js`))
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('hb.modernizr.pack', function () {
     var timestamp=new Date().getTime();
-    var vision='1.0.0';
+    var version='1.0.0';
     var banner = `/**
-     * timestamp: ${timestamp}
+     * version: ${version}
      * modernizr v3.3.1  no feature
      * detectizr v2.2.0
      */\n`;
@@ -171,11 +171,11 @@ gulp.task('hb.modernizr.pack', function () {
         'node_modules/detectizr/dist/detectizr.min.js',
     ])
         //.pipe(sourcemaps.init())
-        .pipe(plugins.concat(`hb.modernizr.pack.${vision}.js`))
+        .pipe(plugins.concat(`hb.modernizr.pack.${version}.js`))
         .pipe(gulp.dest('dist'))
         .pipe(plugins.uglify())
         .pipe(plugins.header(banner))
-        .pipe(plugins.rename(`hb.modernizr.pack.min.${vision}.js`))
+        .pipe(plugins.rename(`hb.modernizr.pack.min.${version}.js`))
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
@@ -247,7 +247,7 @@ gulp.task("hb.account.dev2", function(callback) {
 
 
 gulp.task('lib', function(){
-    gulp.start(['hb.angular.pack','hb.jquery.angular.pack']);
+    gulp.start(['hb.angular.pack','hb.jquery.angular.pack','hb.modernizr.pack']);
 });
 
 
