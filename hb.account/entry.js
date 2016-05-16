@@ -175,7 +175,7 @@ function open(p1,p2,p3){
             password: $password.val()
         }).done(function(res){
             //return res;
-            //console.log(res);
+            console.log(res);
             hb.util.loading.hide();
             $error.hide();
             $phone.val('');
@@ -193,20 +193,19 @@ function open(p1,p2,p3){
             callbackError(res);
         });
     };
+
     $form.on('submit',submit);
     $phone.on('blur',function(){
         if(!isSumitted){
             return
         }
-        frontValidation({
-            phone: $.trim($phone.val())
-        }).then(function(res){
-            $error.hide();
-        },function(res){
-            if(errorType=='phone'){
+        if(errorType=='phone'){
+            frontValidation.phone($.trim($phone.val())).then(function(res){
+                $error.hide();
+            },function(res){
                 $error.text(res).show();
-            }
-        });
+            });
+        }
     });
     //$([$phone,$password]).each(function(){
     //    this.on('blur',function(){
@@ -267,7 +266,7 @@ function login(data) {
 
 
     var init = function() {
-        frontValidation(data).then(function(res){
+        frontValidation.all(data).then(function(res){
             sendXhr();
         },function(res){
             deferred.reject(res);
@@ -300,27 +299,73 @@ function login(data) {
 }
 
 
-function frontValidation(data){
-    var deferred = $.Deferred();
-    data = data || {};
-    switch (true) {
-        case !data.phone:
-            errorType='phone';
-            deferred.reject('请输入手机号');
-            break;
-        case !hb.validation.checkPhone(data.phone):
-            errorType='phone';
-            deferred.reject('您的手机号格式错误');
-            break;
-        case !data.password:
-            errorType='password';
-            deferred.reject('请输入密码');
-            break;
-        default:
-            deferred.resolve('all good');
+
+
+var frontValidation=(function(data){
+    //var deferred = $.Deferred();
+    //data = data || {};
+    //switch (true) {
+    //    case !data.phone:
+    //        errorType='phone';
+    //        deferred.reject('请输入手机号');
+    //        break;
+    //    case !hb.validation.checkPhone(data.phone):
+    //        errorType='phone';
+    //        deferred.reject('您的手机号格式错误');
+    //        break;
+    //    case !data.password:
+    //        errorType='password';
+    //        deferred.reject('请输入密码');
+    //        break;
+    //    default:
+    //        deferred.resolve('all good');
+    //}
+    //return deferred.promise();
+
+
+    function checkPhone(phone){
+        var deferred = $.Deferred();
+        switch (true) {
+            case !phone:
+                errorType='phone';
+                deferred.reject('请输入手机号');
+                break;
+            case !hb.validation.checkPhone(phone):
+                errorType='phone';
+                deferred.reject('您的手机号格式错误');
+                break;
+            default:
+                deferred.resolve('phone good');
+        }
+        return deferred.promise();
     }
-    return deferred.promise();
-}
+    function checkPassword(pwd){
+        var deferred = $.Deferred();
+        switch (true) {
+            case !pwd:
+                errorType='password';
+                deferred.reject('请输入密码');
+                break;
+            default:
+                deferred.resolve('pwd good');
+        }
+        return deferred.promise();
+    }
+
+    function checkAll(data){
+        data = data || {};
+        //var deferred = $.Deferred();
+        return checkPhone(data.phone).then(function(res){
+            return checkPassword(data.password);
+        });
+        //return deferred.promise();
+    }
+
+    return{
+        all:checkAll,
+        phone:checkPhone
+    }
+}());
 
 
 

@@ -75,7 +75,7 @@
 
 
 
-    $.fn.ellipsis = function(options) {
+    $.fn.hb_ellipsis = function(options) {
         var defaults={};
 
         if(!options){
