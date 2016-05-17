@@ -175,7 +175,7 @@ function open(p1,p2,p3){
             password: $password.val()
         }).done(function(res){
             //return res;
-            console.log(res);
+            //console.log(res);
             hb.util.loading.hide();
             $error.hide();
             $phone.val('');

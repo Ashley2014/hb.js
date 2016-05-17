@@ -135,7 +135,9 @@ $ff_chs_h: Arial,Verdana,Tahoma,'Hiragino Sans GB',Microsoft YaHei,SimHei,SimSun
   &-link{
     color: $mainTextColor;
     &:hover{
-      color: $mainColor;
+      //color: $mainColor;
+      color: $mainTextColor;
+      text-decoration: underline;
     }
   }
 }
