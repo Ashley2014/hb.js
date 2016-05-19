@@ -680,7 +680,7 @@ gulp.task('clean', require('del').bind(null, [ 'dist']));
 
 
 gulp.task('default', ['clean'], function(){
-    gulp.start(['hb.js','ieupdate','hb.angular','hb.jquery','hb.account']);
+    gulp.start(['hb.js','ieupdate','hb.angular','hb.jquery','hb.account','lib']);
 });
 
 

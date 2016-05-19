@@ -71,6 +71,7 @@
     "raw-loader": "^0.5.1",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
+    "swiper": "^2.7.6",
     "vinyl-buffer": "^1.0.0",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",

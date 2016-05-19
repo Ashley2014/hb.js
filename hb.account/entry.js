@@ -78,34 +78,6 @@ var  haloAuth=(function() {
     }
 }());
 
-//$.fn.hb_login_zIndex=function( zIndex ) {
-//    if ( zIndex !== undefined ) {
-//        return this.css( "zIndex", zIndex );
-//    }
-//
-//    if ( this.length ) {
-//        var elem = $( this[ 0 ] ), position, value;
-//        while ( elem.length && elem[ 0 ] !== document ) {
-//            // Ignore z-index if position is set to a value where z-index is ignored by the browser
-//            // This makes behavior of this function consistent across browsers
-//            // WebKit always returns auto if the element is positioned
-//            position = elem.css( "position" );
-//            if ( position === "absolute" || position === "relative" || position === "fixed" ) {
-//                // IE returns 0 when zIndex is not specified
-//                // other browsers return a string
-//                // we ignore the case of nested elements with an explicit value of 0
-//                // <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
-//                value = parseInt( elem.css( "zIndex" ), 10 );
-//                if ( !isNaN( value ) && value !== 0 ) {
-//                    return value;
-//                }
-//            }
-//            elem = elem.parent();
-//        }
-//    }
-//
-//    return 0;
-//};
 
 
 
@@ -150,18 +122,21 @@ function open(p1,p2,p3){
 
 
 
-
-
-
-
-    $('body').append($bg).append($html);
+    $('body').addClass('hb-login-body').append($bg.hide()).append($html.hide());
+    $bg.fadeIn(400);
+    $html.fadeIn(100).addClass('enter');
     var scrollTop=$(window).scrollTop();
     var windowH=$(window).height();
     var elH=$html.outerHeight();
-    $html.css({
-        top:scrollTop+windowH/2-elH/2,
-    });
-
+    if(windowH>elH){
+        $html.css({
+            top:scrollTop+windowH/2-elH/2,
+        });
+    }else{
+        $html.css({
+            top:0,
+        });
+    }
     $bg.on('click',close);
     $close.on('click',close);
 
@@ -207,6 +182,11 @@ function open(p1,p2,p3){
             });
         }
     });
+    $html.one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+
+        console.log('finish enter');
+
+    });
     //$([$phone,$password]).each(function(){
     //    this.on('blur',function(){
     //        console.log('aa')
@@ -220,10 +200,15 @@ function open(p1,p2,p3){
 }
 
 function close(){
-    $html.remove();
-    $bg.remove();
+    $html.removeClass('enter');
+    $html.addClass('leave').one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+        console.log('finish leave');
+        $(this).removeClass('hb-login-body leave').remove();
+    });
+    $bg.fadeOut(100).remove();
     $bg.off('click',close);
     $close.off('click',close);
+
 
     //$form.off('submit',submit);
     //$._data($phone,"events");
