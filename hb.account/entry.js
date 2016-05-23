@@ -14,7 +14,9 @@ var $password = $html.find('[hb-login-password]');
 
 
 var bg=`<div class="hb-login-bg"></div>`;
+var cover=`<div class="hb-login-cover"></div>`;
 var $bg=$(bg);
+var $cover=$(cover);
 var options={};
 var defaultOption={
     debug:false,
@@ -86,14 +88,9 @@ hb.account=(function(){
         login:open
     };
 }());
-//console.log($.isPlainObject({a:1}));
-
-//$form.on('submit',function(event){
-//    console.log('oo')
-//    event.preventDefault();
-//});
 
 function open(p1,p2,p3){
+    $html.removeClass('leave').remove();
 
     var callbackSuccess,callbackError;
 
@@ -122,7 +119,7 @@ function open(p1,p2,p3){
 
 
 
-    $('body').addClass('hb-login-body').append($bg.hide()).append($html.hide());
+    $('body').addClass('hb-login-body').append($cover).append($bg.hide()).append($html.hide());
     $bg.fadeIn(400);
     $html.fadeIn(100).addClass('enter');
     var scrollTop=$(window).scrollTop();
@@ -182,38 +179,41 @@ function open(p1,p2,p3){
             });
         }
     });
-    $html.one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
 
-        console.log('finish enter');
 
-    });
-    //$([$phone,$password]).each(function(){
-    //    this.on('blur',function(){
-    //        console.log('aa')
-    //        hintMsg({
-    //            phone: $.trim($phone.val()),
-    //            password: $password.val()
-    //        });
-    //    });
-    //})
+    var transitionEndName=transitionEnd();
+    if(transitionEndName){
+        $html.one(transitionEndName, function(){
+            //console.log('finish enter');
+        });
+    }else{
+        //alert('finish enter');
+    }
+
 
 }
 
+
 function close(){
     $html.removeClass('enter');
-    $html.addClass('leave').one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
-        console.log('finish leave');
-        $(this).removeClass('hb-login-body leave').remove();
-    });
+
+    var transitionEndName=transitionEnd();
+    if(transitionEndName){
+        $html.addClass('leave');
+        $html.one(transitionEndName, function(){
+            //console.log('finish leave');
+            $(this).removeClass('hb-login-body leave').remove();
+        });
+    }else{
+        //alert('finish leave');
+        $html.removeClass('hb-login-body leave').remove();
+    }
+
+
+    $cover.remove();
     $bg.fadeOut(100).remove();
     $bg.off('click',close);
     $close.off('click',close);
-
-
-    //$form.off('submit',submit);
-    //$._data($phone,"events");
-    //console.log($phone)
-    //console.log($._data($phone,"events"))
 
 }
 
@@ -284,28 +284,30 @@ function login(data) {
 }
 
 
+function transitionEnd() {
+    var el = document.createElement('div')//what the hack is bootstrap
+
+    var transEndEventNames = {
+        WebkitTransition : 'webkitTransitionEnd',
+        MozTransition    : 'transitionend',
+        OTransition      : 'oTransitionEnd otransitionend',
+        transition       : 'transitionend'
+    };
+
+    for (var name in transEndEventNames) {
+        if (el.style[name] !== undefined) {
+            return transEndEventNames[name];
+        }
+    }
+
+
+
+    return false; // explicit for ie8 (  ._.)
+}
+
 
 
 var frontValidation=(function(data){
-    //var deferred = $.Deferred();
-    //data = data || {};
-    //switch (true) {
-    //    case !data.phone:
-    //        errorType='phone';
-    //        deferred.reject('请输入手机号');
-    //        break;
-    //    case !hb.validation.checkPhone(data.phone):
-    //        errorType='phone';
-    //        deferred.reject('您的手机号格式错误');
-    //        break;
-    //    case !data.password:
-    //        errorType='password';
-    //        deferred.reject('请输入密码');
-    //        break;
-    //    default:
-    //        deferred.resolve('all good');
-    //}
-    //return deferred.promise();
 
 
     function checkPhone(phone){
@@ -339,11 +341,9 @@ var frontValidation=(function(data){
 
     function checkAll(data){
         data = data || {};
-        //var deferred = $.Deferred();
         return checkPhone(data.phone).then(function(res){
             return checkPassword(data.password);
         });
-        //return deferred.promise();
     }
 
     return{
