@@ -216,13 +216,22 @@
     $.fn.hb_auto_scroll=function( options ) {
         var options=options||{};
         var defaults={
-
+            spaceBetween:15
         };
         var settings = $.extend( {}, defaults, options );
         return this.each(function(){
             var $container = $(this);
 
             var $item = $container.children();
+            $item.css({
+                margin:"0 15px"
+            });
+            $item.first().css({
+                "margin-left":"0"
+            });
+            $item.last().css({
+                "margin-right":"0"
+            });
             var cW = $container.outerWidth();
             $item.on('click',function(){
 
@@ -232,10 +241,13 @@
                 var containerSl=$container.scrollLeft();
 
                 var itemW=$(this).outerWidth();
+
                 var containerW=$container.outerWidth();
+                //console.log(containerW)
                 //var d=$container.scrollLeft();
 
-                $container.animate({scrollLeft: itemPL+containerSl-containerW/2+itemW/2}, 800);
+                //$container.animate({scrollLeft: itemPL+containerSl-containerW/2+itemW/2}, 800);
+                $container.animate({scrollLeft: itemPL+settings.spaceBetween+containerSl-containerW/2+itemW/2}, 800);
             })
         });
     }
