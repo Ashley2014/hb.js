@@ -167,3 +167,76 @@
     }
 })(jQuery);
 
+
+
+//hb_scroll
+
+(function($){
+    $.fn.hb_scroll=function( options ) {
+        var options=options||{};
+        var defaults={
+            bottom:100,
+            reachBottom:function(){
+                //console.log('f')
+            }
+        };
+        var settings = $.extend( {}, defaults, options );
+        return this.each(function(){
+            var $container = $(this);
+
+            $container.on('hb_scroll.reachBottom',function(){
+                settings.reachBottom()
+            });
+
+            $container.on('scroll',function(){
+                var cH=$(this).outerHeight();
+                var cST=$(this).scrollTop();
+                var cSH;
+                if($.isWindow(this)){
+                    cSH=$(document).height();
+                }else{
+                    cSH=$(this)[0].scrollHeight;
+                }
+                //console.log(cH,cSH,cSH-cST-cH);
+                if(cSH-cST-cH<settings.bottom){
+                    $container.trigger('hb_scroll.reachBottom');
+                }
+            })
+
+
+        });
+
+
+    }
+})(jQuery);
+
+//hb_auto_scroll
+
+(function($){
+    $.fn.hb_auto_scroll=function( options ) {
+        var options=options||{};
+        var defaults={
+
+        };
+        var settings = $.extend( {}, defaults, options );
+        return this.each(function(){
+            var $container = $(this);
+
+            var $item = $container.children();
+            var cW = $container.outerWidth();
+            $item.on('click',function(){
+
+                //console.log($container.get()[0].scrollWidth);
+                //console.log($(this).position().left);
+                var itemPL=$(this).position().left;
+                var containerSl=$container.scrollLeft();
+
+                var itemW=$(this).outerWidth();
+                var containerW=$container.outerWidth();
+                //var d=$container.scrollLeft();
+
+                $container.animate({scrollLeft: itemPL+containerSl-containerW/2+itemW/2}, 800);
+            })
+        });
+    }
+})(jQuery);
