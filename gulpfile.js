@@ -68,6 +68,19 @@ gulp.task('hb.js', function () {
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
+
+gulp.task('hb.modernizr.js', function () {
+    return gulp.src('hb.modernizr.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.modernizr.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
 gulp.task('hb.angular', function () {
     return gulp.src('hb.angular.js')
         //.pipe(sourcemaps.init())

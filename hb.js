@@ -639,32 +639,36 @@
 
             var _confirm=function(options){
                 var deferred = $.Deferred();
+                var defaults = {
+                    title:'提示',
+                    content:'提示内容',
+                    rightBtn:'确定',
+                    leftBtn:'取消',
+                };
+
                 if(typeof options=="string"){
-                    var defaults = {
-                        title:'提示',
+                    defaults = $.extend(defaults,{
                         content:options
-                    };
+                    });
                 }else{
-                    var defaults = {
-                        title:'提示',
-                        content:'提示内容'
-                    };
+
                 }
 
                 var settings = $.extend( {},defaults, options );
-                var confirmHtmlStr='' +
-                    '<div class="weui_dialog_confirm">' +
-                    '<div class="weui_mask"></div>' +
-                    '<div class="weui_dialog">' +
-                    '<div class="weui_dialog_hd"><strong class="weui_dialog_title">'+settings.title+'</strong></div>' +
-                    '<div class="weui_dialog_bd">'+settings.content+'</div>' +
-                    '<div class="weui_dialog_ft">' +
-                    '<a href="javascript:;" class="weui_btn_dialog default">取消</a>' +
-                    '<a href="javascript:;" class="weui_btn_dialog primary">确定</a>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '';
+                var confirmHtmlStr=`
+                    <div class="weui_dialog_confirm">
+                    <div class="weui_mask"></div>
+                    <div class="weui_dialog">
+                    <div class="weui_dialog_hd"><strong class="weui_dialog_title">${settings.title}</strong></div>
+                    <div class="weui_dialog_bd">${settings.content}</div>
+                    <div class="weui_dialog_ft">
+                    <a href="javascript:;" class="weui_btn_dialog default">${settings.leftBtn}</a>
+                    <a href="javascript:;" class="weui_btn_dialog primary">${settings.rightBtn}</a>
+                    </div>
+                    </div>
+                    </div>
+                    `;
+
 
                 var $confirmHtml=$(confirmHtmlStr);
                 $("body").append($confirmHtml);
