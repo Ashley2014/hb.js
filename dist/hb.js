@@ -662,11 +662,11 @@
                     <div class="weui_dialog_hd"><strong class="weui_dialog_title">${settings.title}</strong></div>
                     <div class="weui_dialog_bd">${settings.content}</div>
                     <div class="weui_dialog_ft">
-                    <a href="javascript:;" class="weui_btn_dialog default">${settings.leftBtn}</a>'
+                    <a href="javascript:;" class="weui_btn_dialog default">${settings.leftBtn}</a>
                     <a href="javascript:;" class="weui_btn_dialog primary">${settings.rightBtn}</a>
                     </div>
-                    </div>'
-                    </div>'
+                    </div>
+                    </div>
                     `;
 
 
