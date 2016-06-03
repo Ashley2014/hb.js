@@ -175,7 +175,8 @@
     $.fn.hb_auto_scroll=function( options ) {
         var options=options||{};
         var defaults={
-            spaceBetween:15
+            spaceBetween:15,
+            duration:600,
         };
         var settings = $.extend( {}, defaults, options );
         return this.each(function(){
@@ -206,7 +207,7 @@
                 //var d=$container.scrollLeft();
 
                 //$container.animate({scrollLeft: itemPL+containerSl-containerW/2+itemW/2}, 800);
-                $container.animate({scrollLeft: itemPL+settings.spaceBetween+containerSl-containerW/2+itemW/2}, 800);
+                $container.animate({scrollLeft: itemPL+settings.spaceBetween+containerSl-containerW/2+itemW/2}, settings.duration);
             })
         });
     }
