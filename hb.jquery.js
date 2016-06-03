@@ -169,49 +169,6 @@
 
 
 
-//hb_scroll
-
-(function($){
-    $.fn.hb_scroll=function( options ) {
-        var options=options||{};
-        var defaults={
-            bottom:100,
-            reachBottom:function(){
-                //console.log('f')
-            }
-        };
-        var settings = $.extend( {}, defaults, options );
-        return this.each(function(){
-            var $container = $(this);
-
-            $container.on('hb_scroll.reachBottom',function(){
-                settings.reachBottom()
-            });
-
-            $container.on('scroll',function(){
-                var cH=$(this).outerHeight();
-                var cST=$(this).scrollTop();
-                var cSH;
-                if($.isWindow(this)){
-                    cSH=$(document).height();
-                }else{
-                    cSH=$(this)[0].scrollHeight;
-                }
-                //console.log(cH,cSH,cSH-cST-cH);
-                if(cSH-cST-cH<settings.bottom){
-                    $container.trigger('hb_scroll.reachBottom');
-                }
-            })
-
-
-        });
-
-
-    }
-
-
-})(jQuery);
-
 //hb_auto_scroll
 
 (function($){
