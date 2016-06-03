@@ -69,6 +69,19 @@ gulp.task('hb.js', function () {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('hb.scroll.js', function () {
+    return gulp.src('hb.scroll/hb.scroll.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.scroll.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('hb.modernizr.js', function () {
     return gulp.src('hb.modernizr.js')
         //.pipe(sourcemaps.init())
@@ -693,7 +706,7 @@ gulp.task('clean', require('del').bind(null, [ 'dist']));
 
 
 gulp.task('default', ['clean'], function(){
-    gulp.start(['hb.js','ieupdate','hb.angular','hb.jquery','hb.account','lib']);
+    gulp.start(['hb.js','ieupdate','hb.angular','hb.jquery','hb.scroll.js','hb.account','lib']);
 });
 
 
