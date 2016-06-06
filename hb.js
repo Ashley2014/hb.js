@@ -598,19 +598,22 @@
         "use strict";
         var weui=(function(){
             var _alert=function(options){
-                if(typeof options=="string"){
-                    var defaults = {
-                        title:'提示',
-                        content:options
-                    };
-                }else{
-                    var defaults = {
-                        title:'提示',
-                        content:'提示内容'
-                    };
-                }
-                var settings = $.extend( {},defaults, options );
 
+                var defaults = {
+                    title:'提示',
+                    content:'提示内容',
+                    btn:'确定',
+                };
+
+                if(typeof options=="string"){
+                    defaults = $.extend(defaults,{
+                        content:options
+                    });
+                }else{
+
+                }
+
+                var settings = $.extend( {},defaults, options );
 
                 var alertHtmlStr='' +
                     '<div class="weui_dialog_alert" >'+
@@ -623,7 +626,7 @@
                     settings.content +
                     '</div>' +
                     '<div class="weui_dialog_ft">' +
-                    '<a href="javascript:;" class="weui_btn_dialog primary">确定</a>' +
+                    '<a href="javascript:;" class="weui_btn_dialog primary">'+settings.btn +'</a>' +
                     '</div>' +
                     ' </div>' +
                     ' </div>' +
