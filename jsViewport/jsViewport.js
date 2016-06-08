@@ -54,7 +54,7 @@
 
         var viewport = document.querySelector("meta[name=viewport]");
 
-        viewport.setAttribute('content', 'width=device-width, initial-scale='+0.4265+', maximum-scale='+0.4265+', user-scalable=0');
+        viewport.setAttribute('content', 'width=device-width, initial-scale='+scale+', maximum-scale='+scale+', user-scalable=0');
 
 
 
