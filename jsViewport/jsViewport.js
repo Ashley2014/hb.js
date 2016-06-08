@@ -34,6 +34,16 @@
                     scale=deviceWidth/th;
                 }
             }
+            if(navigator.userAgent.match(/(MicroMessenger)/g)){
+//                        scale=Math.round(scale*1000)/1000;
+                var re = /(\d+\.\d{3})/;
+
+                scale =String(scale).match(re)[0];
+//                        alert(scale)
+            }
+
+
+
         }
 
 
@@ -43,7 +53,8 @@
 
 
         var viewport = document.querySelector("meta[name=viewport]");
-        viewport.setAttribute('content', 'width=device-width, initial-scale='+scale+', maximum-scale='+scale+', user-scalable=0');
+
+        viewport.setAttribute('content', 'width=device-width, initial-scale='+0.4265+', maximum-scale='+0.4265+', user-scalable=0');
 
 
 
