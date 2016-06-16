@@ -93,6 +93,18 @@ gulp.task('hb.autoScroll.js', function () {
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
+gulp.task('hb.vKeyboard.js', function () {
+    return gulp.src('hb.vKeyboard/hb.vKeyboard.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.vKeyboard.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
 gulp.task('jsViewport.js', function () {
     return gulp.src('jsViewport/jsViewport.js')
         //.pipe(sourcemaps.init())
@@ -730,7 +742,18 @@ gulp.task('clean', require('del').bind(null, [ 'dist']));
 
 
 gulp.task('default', ['clean'], function(){
-    gulp.start(['hb.js','ieupdate','jsViewport.js','hb.angular','hb.jquery','hb.scroll.js','hb.autoScroll.js','hb.account','lib']);
+    gulp.start([
+        'hb.js',
+        'ieupdate',
+        'jsViewport.js',
+        'hb.angular',
+        'hb.jquery',
+        'hb.scroll.js',
+        'hb.autoScroll.js',
+        'hb.account',
+        'hb.vKeyboard.js',
+        'lib'
+    ]);
 });
 
 
