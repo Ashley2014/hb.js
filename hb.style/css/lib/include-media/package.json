@@ -1,0 +1,74 @@
+{
+  "title": "include-media",
+  "name": "include-media",
+  "version": "1.4.3",
+  "description": "Simple, elegant and maintainable media queries in Sass",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardoboucas/include-media.git"
+  },
+  "main": "index.js",
+  "author": {
+    "name": "Eduardo Boucas",
+    "email": "mail@eduardoboucas.com"
+  },
+  "bugs": {
+    "url": "https://github.com/eduardoboucas/include-media/issues"
+  },
+  "homepage": "http://include-media.com",
+  "scripts": {
+    "test": "gulp test",
+    "lint": "scss-lint . --config ./.scss-lint.yml"
+  },
+  "license": "MIT",
+  "pre-commit": [
+    "test"
+  ],
+  "devDependencies": {
+    "gh-pages": "^0.3.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-header": "^1.2.2",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-replace": "^0.5.3",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-sass": "^2.0.1",
+    "js-yaml": "^3.3.1",
+    "pre-commit": "^1.0.7",
+    "sassdoc": "^2.1.13"
+  },
+  "gitHead": "faeed705731dc4d5419280d2edb09524ac5bfb3a",
+  "_id": "include-media@1.4.3",
+  "_shasum": "55fcec2cb932d7ee17ba71967e6477ecef1459bd",
+  "_from": "include-media@latest",
+  "_npmVersion": "2.14.3",
+  "_nodeVersion": "4.1.0",
+  "_npmUser": {
+    "name": "eduardoboucas",
+    "email": "mail@eduardoboucas.com"
+  },
+  "maintainers": [
+    {
+      "name": "eduardoboucas",
+      "email": "mail@eduardoboucas.com"
+    },
+    {
+      "name": "hugogiraudel",
+      "email": "hugo.giraudel@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "55fcec2cb932d7ee17ba71967e6477ecef1459bd",
+    "size": 11704,
+    "noattachment": false,
+    "tarball": "http://registry.npm.taobao.org/include-media/download/include-media-1.4.3.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/include-media-1.4.3.tgz_1462997591368_0.2982024683151394"
+  },
+  "directories": {},
+  "publish_time": 1462997592890,
+  "_cnpm_publish_time": 1462997592890,
+  "_resolved": "https://registry.npm.taobao.org/include-media/download/include-media-1.4.3.tgz"
+}
