@@ -34,14 +34,19 @@
                     scale=deviceWidth/th;
                 }
             }
-            if(navigator.userAgent.match(/(MicroMessenger)/g)&&navigator.userAgent.match(/(iPhone)/g)){
-//                        scale=Math.round(scale*1000)/1000;
-//                        alert(scale)
-                var re = /(\d+\.\d{3})/;
-//                        alert(scale.toString())
-                scale =String(scale).match(re)[0];
-//                        alert(scale)
-            }
+
+            scale=Math.floor(scale*1000)/1000;
+
+
+
+//            if(navigator.userAgent.match(/(MicroMessenger)/g)&&navigator.userAgent.match(/(iPhone)/g)){
+////                        scale=Math.round(scale*1000)/1000;
+////                        alert(scale)
+//                var re = /(\d+\.\d{3})/;
+////                        alert(scale.toString())
+//                scale =String(scale).match(re)[0];
+////                        alert(scale)
+//            }
 //                    alert(scale)
 
 
