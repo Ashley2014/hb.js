@@ -4,30 +4,19 @@
     <meta charset="UTF-8">
     <title>seat</title>
     <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
-</head>
+    </head>
 <body>
-<canvas id="myCanvas">your browser does not support the canvas tag </canvas>
+<h2>
+    seat
+</h2>
+
+<!--<img src="seat.svg" alt="">-->
+
+<canvas id="myCanvas" width="300" height="400" >your browser does not support the canvas tag </canvas>
+
 
 <script>
-
-    ;(function(){
-        "use strict";
-
-        var canvas=document.getElementById('myCanvas');
-        var ctx=canvas.getContext('2d');
-        ctx.fillStyle='#FF8800';
-        ctx.fillRect(0,0,80,100);
-
-        ctx.addEventListener('click',function(){
-            alert("ff")
-        })
-
-    }());
-
-
+    document.write('<script type="text/javascript" src="hb.dragv2.js?v='+new Date().getTime()+'"><\/script>');
 </script>
-
-
-
 </body>
 </html>
