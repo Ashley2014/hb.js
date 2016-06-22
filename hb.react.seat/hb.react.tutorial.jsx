@@ -119,14 +119,12 @@
     });
 
 
-    $.ajax('http://10.0.1.29:1111/seat').then(function(res){
-        console.log(res)
-        ReactDOM.render(
-            <CommentBox url="http://10.0.1.29:1111/reactcomment"   />,
-            document.getElementById('example')
-        );
+    ReactDOM.render(
+        <CommentBox url="http://10.0.1.29:1111/reactcomment"   />,
+        document.getElementById('example')
+    );
 
-    });
+
 
 
 
