@@ -4,7 +4,8 @@
     function drag(dom,options){
         var options=options||{};
         var defaults={
-            bottom:100,
+            maxScale:2,
+            minScale:0.5,
             position:{
                 left:0,
                 top:0,
@@ -28,6 +29,7 @@
 
 
     drag.prototype.init=function(){
+        var _this=this;
         this.hammertime = new Hammer(this.element, {});
         this.hammertime.get('pinch').set({ enable: true });
 
@@ -45,6 +47,12 @@
         var leftGap=objParentBorderLeftWidth+objParentBorderOffsetLeft;
         var topGap=objParentBorderTopWidth+objParentBorderOffsetTop;
         console.log(leftGap,topGap);
+
+        if(objParentWidth/objWidth>objParentHeight/objHeight){
+            this.settings.minScale=objParentWidth/objWidth;
+        }else{
+            this.settings.minScale=objParentHeight/objHeight;
+        }
 
 
         var position=this.settings.position;
@@ -66,6 +74,7 @@
 
         this.hammertime.on('pan', function(ev) {
             console.log('pan',ev);
+            console.log('pan',lNow,tNow);
 
             //console.log(ev.deltaX,ev.deltaY,ev.velocityX,ev.velocityY,ev.distance);
 
@@ -84,6 +93,15 @@
             //if( tNow>0){
             //    tNow=0;
             //}
+
+            if( lNow<(objParentWidth-objWidth+(objWidth-objWidth*scaleNow-(center.x-center.x*scaleNow))) ){
+                lNow=objParentWidth-objWidth+(objWidth-objWidth*scaleNow-(center.x-center.x*scaleNow))
+            }
+
+
+            if( tNow<(objParentHeight-objHeight+(objHeight-objHeight*scaleNow-(center.y-center.y*scaleNow))) ){
+                tNow=objParentHeight-objHeight+(objHeight-objHeight*scaleNow-(center.y-center.y*scaleNow))
+            }
 
 
 
@@ -106,15 +124,7 @@
             //}
 
 
-
-            if( lNow<(objParentWidth-objWidth+(objWidth-objWidth*scaleNow-(center.x-center.x*scaleNow))) ){
-                lNow=objParentWidth-objWidth+(objWidth-objWidth*scaleNow-(center.x-center.x*scaleNow))
-            }
-
-
-            if( tNow<(objParentHeight-objHeight+(objHeight-objHeight*scaleNow-(center.y-center.y*scaleNow))) ){
-                tNow=objParentHeight-objHeight+(objHeight-objHeight*scaleNow-(center.y-center.y*scaleNow))
-            }
+            //
 
 
             //console.log(lNow,tNow)
@@ -135,41 +145,94 @@
         this.hammertime.on('panend', function(ev) {
             position.left=lNow;
             position.top=tNow;
+            //console.log('panpanend',lNow,tNow);
             //console.log('pinch',ev);
         });
 
+
+
+        this.hammertime.on('pinchstart', function(ev) {
+
+            scaleLast=0;
+        });
         this.hammertime.on('pinch', function(ev) {
-            console.log('pinch',ev);
+            //console.log('pinch',ev);
+            console.log('lNow,tNow',lNow,tNow);
 
             if(scaleLast){
                 var deltaScale=ev.scale-scaleLast;
             }else{
-                var deltaScale=0
+                var deltaScale=0;
             }
+            console.log('deltaScale',deltaScale);
 
             scaleNow=position.scale+deltaScale;
+
+            if(scaleNow>_this.settings.maxScale){
+                scaleNow=_this.settings.maxScale;
+
+            }
+            if(scaleNow<_this.settings.minScale){
+                scaleNow=_this.settings.minScale;
+            }
+
+
             position.scale=scaleNow;
             scaleLast=ev.scale;
 
-            //console.log('pinch',scaleNow);
+            console.log('scaleNow',scaleNow);
+
+            console.log('position.left,position.top',position.left,position.top,position.scale);
             $element.css({
-                transform: `scale3d(${scaleNow},${scaleNow},${scaleNow}) translate3d(${position.left}px,${position.top}px,0)`,
+
+                transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${scaleNow},${scaleNow},${scaleNow})`,
                 transformOrigin: `${ev.center.x-leftGap-lNow}px ${ev.center.y-topGap-tNow}px 0`,
             });
+
+
 
             center={
                 x:ev.center.x-leftGap-lNow,
                 y:ev.center.y-topGap-tNow,
             };
 
-
-
+            console.log('pinch',scaleNow,'deltaScale',deltaScale);
 
         });
         this.hammertime.on('pinchend', function(ev) {
 
             position.scale=scaleNow;
             scaleLast=0;
+
+            var maxL=-(center.x-center.x*scaleNow);
+            var maxT=-(center.y-center.y*scaleNow);
+            //
+            if(lNow>maxL){
+                lNow=maxL;
+            }
+
+            if(tNow>maxT){
+                tNow=maxT;
+            }
+            //lNow=lNow-(center.x-center.x*scaleNow);
+            //tNow=tNow-(center.y-center.y*scaleNow);
+            //
+
+            console.log('pinchend',lNow,tNow);
+
+            //
+            $element.css({
+                transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${position.scale},${position.scale},${position.scale})`,
+            });
+            position.left=lNow;
+            position.top=tNow;
+
+            //lNow=lNow-(center.x-center.x*scaleNow);
+            //if( lNow>-(center.x-center.x*scaleNow)){
+            //    lNow=-(center.x-center.x*scaleNow);
+            //}
+
+
 
         });
 
