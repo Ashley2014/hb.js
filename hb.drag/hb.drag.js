@@ -155,7 +155,9 @@
 
             scaleLast=0;
         });
-        this.hammertime.on('pinch', function(ev) {
+
+
+        this.hammertime.on('pinchmove', function(ev) {
             //console.log('pinch',ev);
             console.log('lNow,tNow',lNow,tNow);
 
@@ -197,40 +199,47 @@
             };
 
             console.log('pinch',scaleNow,'deltaScale',deltaScale);
-
         });
+
+        //this.hammertime.on('pinchcancel', function(ev) {
+        //    alert('pinchcancel')
+        //})
+
+
         this.hammertime.on('pinchend', function(ev) {
+            //alert(scaleNow);
 
             position.scale=scaleNow;
             scaleLast=0;
 
             var maxL=-(center.x-center.x*scaleNow);
             var maxT=-(center.y-center.y*scaleNow);
-            //
+
             if(lNow>maxL){
                 lNow=maxL;
+                //alert('lNow')
+                //alert(lNow)
             }
 
             if(tNow>maxT){
                 tNow=maxT;
+                //alert('tNow')
+                //alert(tNow)
             }
+
             //lNow=lNow-(center.x-center.x*scaleNow);
             //tNow=tNow-(center.y-center.y*scaleNow);
             //
 
             console.log('pinchend',lNow,tNow);
 
-            //
+
             $element.css({
                 transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${position.scale},${position.scale},${position.scale})`,
             });
             position.left=lNow;
             position.top=tNow;
 
-            //lNow=lNow-(center.x-center.x*scaleNow);
-            //if( lNow>-(center.x-center.x*scaleNow)){
-            //    lNow=-(center.x-center.x*scaleNow);
-            //}
 
 
 
