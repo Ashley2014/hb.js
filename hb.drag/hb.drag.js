@@ -68,11 +68,12 @@
             y:objHeight/2,
         };
 
+
         $element.css({
             transform: `translate3d(${lNow}px,${tNow}px,0)`,
         });
 
-        this.hammertime.on('pan', function(ev) {
+        this.hammertime.on('panmove', function(ev) {
             console.log('pan',ev);
             console.log('pan',lNow,tNow);
 
@@ -212,17 +213,30 @@
             position.scale=scaleNow;
             scaleLast=0;
 
-            var maxL=-(center.x-center.x*scaleNow);
-            var maxT=-(center.y-center.y*scaleNow);
+            var maxL=objParentWidth-objWidth+(objWidth-objWidth*scaleNow-(center.x-center.x*scaleNow));
+            var maxT=objParentHeight-objHeight+(objHeight-objHeight*scaleNow-(center.y-center.y*scaleNow));
 
-            if(lNow>maxL){
-                lNow=maxL;
+            if( lNow<maxL ){
+                lNow=maxL
+            }
+
+            if( tNow<maxT ){
+                tNow=maxT
+            }
+
+
+
+            var minL=-(center.x-center.x*scaleNow);
+            var minT=-(center.y-center.y*scaleNow);
+
+            if(lNow>minL){
+                lNow=minL;
                 //alert('lNow')
                 //alert(lNow)
             }
 
-            if(tNow>maxT){
-                tNow=maxT;
+            if(tNow>minT){
+                tNow=minT;
                 //alert('tNow')
                 //alert(tNow)
             }
