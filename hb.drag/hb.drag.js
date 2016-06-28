@@ -46,7 +46,7 @@
         var objParentBorderOffsetTop = $elementParent.offset().top;
         var leftGap=objParentBorderLeftWidth+objParentBorderOffsetLeft;
         var topGap=objParentBorderTopWidth+objParentBorderOffsetTop;
-        console.log(leftGap,topGap);
+        //console.log(leftGap,topGap);
 
         if(objParentWidth/objWidth>objParentHeight/objHeight){
             this.settings.minScale=objParentWidth/objWidth;
@@ -74,8 +74,8 @@
         });
 
         this.hammertime.on('panmove', function(ev) {
-            console.log('pan',ev);
-            console.log('pan',lNow,tNow);
+            //console.log('pan',ev);
+            //console.log('pan',lNow,tNow);
 
             //console.log(ev.deltaX,ev.deltaY,ev.velocityX,ev.velocityY,ev.distance);
 
@@ -160,14 +160,14 @@
 
         this.hammertime.on('pinchmove', function(ev) {
             //console.log('pinch',ev);
-            console.log('lNow,tNow',lNow,tNow);
+            //console.log('lNow,tNow',lNow,tNow);
 
             if(scaleLast){
                 var deltaScale=ev.scale-scaleLast;
             }else{
                 var deltaScale=0;
             }
-            console.log('deltaScale',deltaScale);
+            //console.log('deltaScale',deltaScale);
 
             scaleNow=position.scale+deltaScale;
 
@@ -183,9 +183,9 @@
             position.scale=scaleNow;
             scaleLast=ev.scale;
 
-            console.log('scaleNow',scaleNow);
+            //console.log('scaleNow',scaleNow);
 
-            console.log('position.left,position.top',position.left,position.top,position.scale);
+            //console.log('position.left,position.top',position.left,position.top,position.scale);
             $element.css({
 
                 transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${scaleNow},${scaleNow},${scaleNow})`,
@@ -199,7 +199,7 @@
                 y:ev.center.y-topGap-tNow,
             };
 
-            console.log('pinch',scaleNow,'deltaScale',deltaScale);
+            //console.log('pinch',scaleNow,'deltaScale',deltaScale);
         });
 
         //this.hammertime.on('pinchcancel', function(ev) {
@@ -245,7 +245,7 @@
             //tNow=tNow-(center.y-center.y*scaleNow);
             //
 
-            console.log('pinchend',lNow,tNow);
+            //console.log('pinchend',lNow,tNow);
 
 
             $element.css({

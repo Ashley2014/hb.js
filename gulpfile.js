@@ -117,6 +117,30 @@ gulp.task('jsViewport.js', function () {
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
+gulp.task('jsViewportRootSize.js', function () {
+    return gulp.src('jsViewport/jsViewportRootSize.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("jsViewportRootSize.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('hb.drag', function () {
+    return gulp.src('hb.drag/hb.drag.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.drag.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
 
 gulp.task('hb.modernizr.js', function () {
     return gulp.src('hb.modernizr.js')
