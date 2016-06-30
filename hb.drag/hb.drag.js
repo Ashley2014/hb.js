@@ -11,9 +11,18 @@
                 top:0,
                 scale:1
             },
-            reachBottom:function(){
+            onPinchMove:function(){
                 //console.log('f')
-            }
+            },
+            onPinchEnd:function(){
+                //console.log('f')
+            },
+            onPanMove:function(){
+                //console.log('f')
+            },
+            onPanEnd:function(){
+                //console.log('f')
+            },
         };
         this.settings = $.extend( {}, defaults, options );
 
@@ -139,8 +148,13 @@
             });
 
             //console.log(lNow,tNow);
-
-
+            //position.left=lNow;
+            //position.top=tNow;
+            _this.settings.onPanMove({
+                left:lNow,
+                top:tNow,
+                scale:position.scale,
+            });
         });
 
         this.hammertime.on('panend', function(ev) {
@@ -148,6 +162,7 @@
             position.top=tNow;
             //console.log('panpanend',lNow,tNow);
             //console.log('pinch',ev);
+            _this.settings.onPanEnd(position);
         });
 
 
@@ -198,7 +213,8 @@
                 x:ev.center.x-leftGap-lNow,
                 y:ev.center.y-topGap-tNow,
             };
-
+            position.scale=scaleNow;
+            _this.settings.onPinchMove(position);
             //console.log('pinch',scaleNow,'deltaScale',deltaScale);
         });
 
@@ -253,8 +269,7 @@
             });
             position.left=lNow;
             position.top=tNow;
-
-
+            _this.settings.onPinchEnd(position);
 
 
         });
