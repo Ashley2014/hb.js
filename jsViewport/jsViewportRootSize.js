@@ -27,6 +27,7 @@
                     fontSize=deviceWidth/th;
                 }
             }
+            fontSize=deviceWidth/mw;
             document.documentElement.style.fontSize=fontSize*50+'px';
         }
         window.addEventListener("orientationchange", function(event){
