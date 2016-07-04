@@ -141,6 +141,18 @@ gulp.task('hb.drag', function () {
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
+gulp.task('hb.fancyNumber', function () {
+    return gulp.src('hb.fancyNumber/hb.fancyNumber.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.fancyNumber.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
 
 gulp.task('hb.modernizr.js', function () {
     return gulp.src('hb.modernizr.js')
