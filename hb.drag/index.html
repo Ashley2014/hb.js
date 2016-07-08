@@ -58,7 +58,9 @@
     document.write('<script type="text/javascript" src="hb.drag-compiled.js?v='+new Date().getTime()+'"><\/script>');
 </script>
 <script>
-    hb.drag("#inner",{})
+    var aa=hb.drag("#inner",{});
+    aa.move(-20,-20);
+
     hb.drag("#inner2",{})
 </script>
 </body>

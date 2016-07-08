@@ -278,6 +278,16 @@
 
     };
 
+    drag.prototype.move=function(x,y){
+        var _this=this;
+        var $element = this.$element;
+        var position=this.settings.position;
+        position.left=x;
+        position.top=y;
+        $element.css({
+            transform: `translate3d(${x}px,${y}px,0) scale3d(${position.scale},${position.scale},${position.scale})`,
+        });
+    };
 
 
 
