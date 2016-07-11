@@ -41,6 +41,7 @@
         var _this=this;
         this.hammertime = new Hammer(this.element, {});
         this.hammertime.get('pinch').set({ enable: true });
+        this.hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
 
         var $element = this.$element;
         var $elementParent = this.$element.parent();
@@ -81,6 +82,10 @@
         $element.css({
             transform: `translate3d(${lNow}px,${tNow}px,0)`,
         });
+
+        //this.hammertime.on('swipe', function(ev) {
+        //    console.log('swipe',ev);
+        //});
 
         this.hammertime.on('panmove', function(ev) {
             //console.log('pan',ev);
