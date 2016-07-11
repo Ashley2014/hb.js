@@ -173,7 +173,13 @@
 
 
         this.hammertime.on('pinchstart', function(ev) {
+            lNow=position.left;
+            tNow=position.top;
 
+            //center={
+            //    x:ev.center.x-leftGap-lNow,
+            //    y:ev.center.y-topGap-tNow,
+            //};
             scaleLast=0;
         });
 
@@ -291,6 +297,17 @@
         position.top=y;
         $element.css({
             transform: `translate3d(${x}px,${y}px,0) scale3d(${position.scale},${position.scale},${position.scale})`,
+        });
+    };
+
+    drag.prototype.scale=function(scale){
+        var _this=this;
+        var $element = this.$element;
+        var position=this.settings.position;
+        position.scale=scale;
+
+        $element.css({
+            transform: `translate3d(${position.left}px,${position.top}px,0) scale3d(${scale},${scale},${scale})`,
         });
     };
 
