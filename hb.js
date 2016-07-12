@@ -983,6 +983,22 @@
         };
         haloBear.util.formatNumber=formatNumber;
     })(window, document);
+    /*
+     *
+     * 数字前补0
+     */
+    (function(window,document,undefined) {
+        "use strict";
+        /*
+         *
+         *
+         */
+        function pad (str, max) {
+            str = str.toString();
+            return str.length < max ? pad("0" + str, max) : str;
+        }
+        haloBear.util.pad=pad;
+    })(window, document);
 
     /*
      hb.util.loading

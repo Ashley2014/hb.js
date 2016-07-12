@@ -8,6 +8,7 @@
             number:0,
             preClass:'hb-fancy-num',
             staticClass:'hb-fancy-num',
+            containerClass:false,
             position:{
                 left:0,
                 top:0,
@@ -58,9 +59,16 @@
         var htmlString=``;
 
 
-        numberArr.forEach((n,i)=>{
-            htmlString+=`<i class="${settings.staticClass} ${settings.preClass}${n}"></i>`
-        })
+
+        if(settings.containerClass){
+            numberArr.forEach((n,i)=>{
+                htmlString+=`<span class="${settings.containerClass}"><i class="${settings.staticClass} ${settings.preClass}${n}"></i></span>`
+            })
+        }else{
+            numberArr.forEach((n,i)=>{
+                htmlString+=`<i class="${settings.staticClass} ${settings.preClass}${n}"></i>`
+            })
+        }
 
         $element.empty().append(htmlString);
 
