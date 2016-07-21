@@ -1,10 +1,5 @@
-/*
- * 0.0.2
- *
- *
- */
 
-(function(window,document){
+;(function(window,document){
     "use strict";
 
     var haloBear=(function(){
