@@ -593,7 +593,7 @@
         "use strict";
         var weui=(function(){
             var _alert=function(options){
-
+                var deferred = $.Deferred();
                 var defaults = {
                     title:'提示',
                     content:'提示内容',
@@ -632,7 +632,9 @@
                 var $confirmBt=$alertHtml.find(".weui_btn_dialog");
                 $confirmBt.on('click',function(){
                     $alertHtml.remove();
+                    deferred.resolve(true);
                 });
+                return deferred.promise();
             };
 
             var _confirm=function(options){
