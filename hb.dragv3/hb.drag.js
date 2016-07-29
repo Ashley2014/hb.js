@@ -4,7 +4,7 @@
     function drag(dom,options){
         var options=options||{};
         var defaults={
-            maxScale:2,
+            maxScale:3,
             minScale:0.5,
             position:{
                 left:0,
@@ -204,7 +204,8 @@
         this.hammertime.on('pinchstart', function(ev) {
             lNow=position.left;
             tNow=position.top;
-
+            console.log('ev pinchstart',ev);
+            console.log('ev.scale pinchstart',ev.scale);
             elementParentRect =$elementParent.get()[0].getBoundingClientRect();
             leftGap=objParentBorderLeftWidth+elementParentRect.left;
             topGap=objParentBorderTopWidth+elementParentRect.top;
@@ -230,6 +231,7 @@
         this.hammertime.on('pinchmove', function(ev) {
             //console.log('pinch',ev);
             //console.log('lNow,tNow',lNow,tNow);
+            //console.log('ev.scale pinchmove',ev.scale);
 
             if(scaleLast){
                 var deltaScale=ev.scale-scaleLast;
@@ -248,62 +250,76 @@
                 scaleNow=_this.settings.minScale;
             }
 
+            if(scaleNow!=_this.settings.maxScale&&scaleNow!=_this.settings.minScale){
+
+                //center={
+                //    x:ev.center.x-leftGap,
+                //    y:ev.center.y-topGap,
+                //};
+
+
+                center={
+                    x:(ev.center.x-leftGap-lNow),
+                    y:(ev.center.y-topGap-tNow),
+                };
+
+
+
+
+
+                //
+                //lNow=-(center.x*scaleNow-center.x);
+                //tNow=-(center.y*scaleNow-center.y);
+
+
+                lNow=-(center.x*deltaScale/2)+lNow;
+                tNow=-(center.y*deltaScale/2)+tNow;
+
+
+                //console.log('lNow,tNow',lNow,tNow);
+                //console.log('scaleNow',scaleNow);
+                //console.log('centerx',center.x,'centery',center.y);
+
+                //
+                //console.log('scaleNow',scaleNow,lNow,tNow,ev.center.x,ev.center.y);
+                //console.log('gap',leftGap,topGap);
+                //console.log('elementParentRect',elementParentRect.top,elementParentRect.left)
+                //console.log('$elementParent.offset()',$elementParent.offset().top)
+
+                //console.log('position.left,position.top',position.left,position.top,position.scale);
+                //$element.css({
+                //
+                //    transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${scaleNow},${scaleNow},${scaleNow})`,
+                //    transformOrigin: `${ev.center.x-leftGap-lNow}px ${ev.center.y-topGap-tNow}px 0`,
+                //});
+
+                $element.css({
+                    transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${scaleNow},${scaleNow},${scaleNow})`,
+                    transformOrigin: `0px 0px 0px`,
+                });
+
+            }
+
+
 
             position.scale=scaleNow;
             scaleLast=ev.scale;
-
-
-
-            center={
-                x:ev.center.x-leftGap,
-                y:ev.center.y-topGap,
-            };
-
-
-            position.scale=scaleNow;
-
-
-
-            lNow=-(center.x*scaleNow-center.x);
-            tNow=-(center.y*scaleNow-center.y);
-
-
-
-
-            //
-            //console.log('scaleNow',scaleNow,lNow,tNow,ev.center.x,ev.center.y);
-            //console.log('gap',leftGap,topGap);
-            //console.log('elementParentRect',elementParentRect.top,elementParentRect.left)
-            //console.log('$elementParent.offset()',$elementParent.offset().top)
-
-            //console.log('position.left,position.top',position.left,position.top,position.scale);
-            //$element.css({
-            //
-            //    transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${scaleNow},${scaleNow},${scaleNow})`,
-            //    transformOrigin: `${ev.center.x-leftGap-lNow}px ${ev.center.y-topGap-tNow}px 0`,
-            //});
-            $element.css({
-
-                transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${scaleNow},${scaleNow},${scaleNow})`,
-                transformOrigin: `0px 0px 0px`,
-            });
-
-
 
             _this.settings.onPinchMove(position);
             //console.log('pinch',scaleNow,'deltaScale',deltaScale);
         });
 
         this.hammertime.on('pinchcancel', function(ev) {
-            alert('pinchcancel')
+            //alert('pinchcancel')
         })
 
 
 
-        //this.hammertime.on('pinchend', function(ev) {
+        this.hammertime.on('pinchend', function(ev) {
+
         //    //alert(scaleNow);
-        //    position.scale=scaleNow;
-        //    scaleLast=0;
+            position.scale=scaleNow;
+            scaleLast=0;
         //
         //
         //    var maxL=objParentWidth-objWidth*scaleNow;
@@ -329,10 +345,32 @@
         //        transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${position.scale},${position.scale},${position.scale})`,
         //        transformOrigin: `0px 0px 0px`,
         //    });
-        //    position.left=lNow;
-        //    position.top=tNow;
-        //    _this.settings.onPinchEnd(position);
-        //});
+
+
+            if( lNow<(objParentWidth-objWidth*scaleNow) ){
+                lNow=objParentWidth-objWidth*scaleNow;
+            }
+
+            if( tNow<(objParentHeight-objHeight*scaleNow) ){
+                tNow=objParentHeight-objHeight*scaleNow;
+            }
+
+            if( lNow>0){
+                lNow=0;
+            }
+
+            if( tNow>0){
+                tNow=0;
+            }
+
+            $element.css({
+                transform: `translate3d(${lNow}px,${tNow}px,0) scale3d(${position.scale},${position.scale},${position.scale})`,
+                transformOrigin: `0px 0px 0px`,
+            });
+            position.left=lNow;
+            position.top=tNow;
+            _this.settings.onPinchEnd(position);
+        });
 
     };
 
