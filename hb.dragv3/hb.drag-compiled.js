@@ -1,3 +1,5 @@
+'use strict';
+
 ;(function () {
     "use strict";
 
@@ -11,16 +13,16 @@
                 top: 0,
                 scale: 1
             },
-            onPinchMove: function () {
+            onPinchMove: function onPinchMove() {
                 //console.log('f')
             },
-            onPinchEnd: function () {
+            onPinchEnd: function onPinchEnd() {
                 //console.log('f')
             },
-            onPanMove: function () {
+            onPanMove: function onPanMove() {
                 //console.log('f')
             },
-            onPanEnd: function () {
+            onPanEnd: function onPanEnd() {
                 //console.log('f')
             }
         };
@@ -87,7 +89,7 @@
         };
 
         $element.css({
-            transform: `translate3d(${ lNow }px,${ tNow }px,0)`
+            transform: 'translate3d(' + lNow + 'px,' + tNow + 'px,0)'
         });
 
         //this.hammertime.on('swipe', function(ev) {
@@ -160,8 +162,8 @@
             //    transform: `translate3d(${lNow}px,${tNow}px,0)`,
             //});
             $element.css({
-                transform: `translate3d(${ lNow }px,${ tNow }px,0) scale3d(${ position.scale },${ position.scale },${ position.scale })`,
-                transformOrigin: `0px 0px 0px`
+                transform: 'translate3d(' + lNow + 'px,' + tNow + 'px,0) scale3d(' + position.scale + ',' + position.scale + ',' + position.scale + ')',
+                transformOrigin: '0px 0px 0px'
             });
 
             //console.log(lNow,tNow);
@@ -266,8 +268,8 @@
                 //});
 
                 $element.css({
-                    transform: `translate3d(${ lNow }px,${ tNow }px,0) scale3d(${ scaleNow },${ scaleNow },${ scaleNow })`,
-                    transformOrigin: `0px 0px 0px`
+                    transform: 'translate3d(' + lNow + 'px,' + tNow + 'px,0) scale3d(' + scaleNow + ',' + scaleNow + ',' + scaleNow + ')',
+                    transformOrigin: '0px 0px 0px'
                 });
             }
 
@@ -331,8 +333,8 @@
             }
 
             $element.css({
-                transform: `translate3d(${ lNow }px,${ tNow }px,0) scale3d(${ position.scale },${ position.scale },${ position.scale })`,
-                transformOrigin: `0px 0px 0px`
+                transform: 'translate3d(' + lNow + 'px,' + tNow + 'px,0) scale3d(' + position.scale + ',' + position.scale + ',' + position.scale + ')',
+                transformOrigin: '0px 0px 0px'
             });
             position.left = lNow;
             position.top = tNow;
@@ -347,7 +349,7 @@
         position.left = x;
         position.top = y;
         $element.css({
-            transform: `translate3d(${ x }px,${ y }px,0) scale3d(${ position.scale },${ position.scale },${ position.scale })`
+            transform: 'translate3d(' + x + 'px,' + y + 'px,0) scale3d(' + position.scale + ',' + position.scale + ',' + position.scale + ')'
         });
     };
 
@@ -362,7 +364,7 @@
         position.scale = scale;
 
         $element.css({
-            transform: `translate3d(${ position.left }px,${ position.top }px,0) scale3d(${ scale },${ scale },${ scale })`
+            transform: 'translate3d(' + position.left + 'px,' + position.top + 'px,0) scale3d(' + scale + ',' + scale + ',' + scale + ')'
         });
     };
 
