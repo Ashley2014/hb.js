@@ -77,6 +77,12 @@
             x:objWidth/2,
             y:objHeight/2,
         };
+        this.settings.center=center;
+        this.settings.constant={
+            leftGap:leftGap,
+            topGap:topGap,
+        };
+
 
 
         $element.css({
@@ -168,6 +174,7 @@
             //console.log('panpanend',lNow,tNow);
             //console.log('pinch',ev);
             _this.settings.onPanEnd(position);
+
         });
 
 
@@ -180,6 +187,10 @@
             //    x:ev.center.x-leftGap-lNow,
             //    y:ev.center.y-topGap-tNow,
             //};
+            //console.log(center,lNow,tNow)
+            //$element.css({
+            //    transformOrigin: `${ev.center.x-leftGap-lNow}px ${ev.center.y-topGap-tNow}px 0`,
+            //});
             scaleLast=0;
         });
 
@@ -304,7 +315,14 @@
         var _this=this;
         var $element = this.$element;
         var position=this.settings.position;
+        var center=this.settings.center;
+        var leftGap=this.settings.constant.leftGap;
+        var topGap=this.settings.constant.topGap;
+
         position.scale=scale;
+
+
+
 
         $element.css({
             transform: `translate3d(${position.left}px,${position.top}px,0) scale3d(${scale},${scale},${scale})`,
