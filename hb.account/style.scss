@@ -22,7 +22,7 @@ $media-expressions: (
 @import '../node_modules/include-media/dist/include-media';
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables';
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins';
-@import "../hbMixin";
+@import "../hb.style/css/hbMixin";
 
 $mainColor:#ff409b;
 $pictureMainColor:#b08dfd;
