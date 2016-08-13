@@ -65,36 +65,39 @@
         });
 
         $numberMinus.on('click',function(){
-            var val=$numberControl.val();
-            //console.log(val);
-            val=parseInt(val);
-            var newVal=val-1;
-            _this.switchActive(newVal);
-            if(newVal>=1&&newVal<=settings.max){
-                $numberControl.val(newVal);
-            }else if(newVal>settings.max){
-                $numberControl.val(settings.max);
-            }else{
-                $numberControl.val(0)
-            }
-            settings.afterMinus(newVal);
-            settings.onChange(newVal);
+
+            _this.minus();
+            //var val=$numberControl.val();
+            ////console.log(val);
+            //val=parseInt(val);
+            //var newVal=val-1;
+            //_this.switchActive(newVal);
+            //if(newVal>=1&&newVal<=settings.max){
+            //    $numberControl.val(newVal);
+            //}else if(newVal>settings.max){
+            //    $numberControl.val(settings.max);
+            //}else{
+            //    $numberControl.val(0)
+            //}
+            //settings.afterMinus(newVal);
+            //settings.onChange(newVal);
         });
         $numberAdd.on('click',function(){
-            var val=$numberControl.val();
-            //console.log(val);
-            val=parseInt(val);
-            var newVal=val+1;
-            _this.switchActive(newVal);
-            if(newVal>=0&&newVal<=settings.max){
-                $numberControl.val(newVal)
-            }else if(newVal>settings.max){
-                $numberControl.val(settings.max);
-            }else{
-                $numberControl.val(1)
-            }
-            settings.afterAdd(newVal);
-            settings.onChange(newVal);
+            _this.add();
+            //var val=$numberControl.val();
+            ////console.log(val);
+            //val=parseInt(val);
+            //var newVal=val+1;
+            //_this.switchActive(newVal);
+            //if(newVal>=0&&newVal<=settings.max){
+            //    $numberControl.val(newVal)
+            //}else if(newVal>settings.max){
+            //    $numberControl.val(settings.max);
+            //}else{
+            //    $numberControl.val(1)
+            //}
+            //settings.afterAdd(newVal);
+            //settings.onChange(newVal);
 
         });
 
@@ -166,6 +169,21 @@
         var $numberMinus = $element.find('[number-minus]');
         var $numberAdd = $element.find('[number-add]');
 
+        var val=$numberControl.val();
+        //console.log(val);
+        val=parseInt(val);
+        var newVal=val+1;
+        _this.switchActive(newVal);
+        if(newVal>=0&&newVal<=settings.max){
+            $numberControl.val(newVal)
+        }else if(newVal>settings.max){
+            $numberControl.val(settings.max);
+        }else{
+            $numberControl.val(1)
+        }
+        settings.afterAdd(newVal);
+        settings.onChange(newVal);
+
     };
 
     numberBox.prototype.minus=function(){
@@ -178,6 +196,21 @@
         var $numberControl = $element.find('[number-control]');
         var $numberMinus = $element.find('[number-minus]');
         var $numberAdd = $element.find('[number-add]');
+
+        var val=$numberControl.val();
+        //console.log(val);
+        val=parseInt(val);
+        var newVal=val-1;
+        _this.switchActive(newVal);
+        if(newVal>=1&&newVal<=settings.max){
+            $numberControl.val(newVal);
+        }else if(newVal>settings.max){
+            $numberControl.val(settings.max);
+        }else{
+            $numberControl.val(0)
+        }
+        settings.afterMinus(newVal);
+        settings.onChange(newVal);
     };
 
     numberBox.prototype.switchActive=function(val){
