@@ -16,5 +16,8 @@
   ],
   "dependencies": {
     "qiniu": "^1.0.15-beta"
+  },
+  "devDependencies": {
+    "js-url": "^2.3.0"
   }
 }

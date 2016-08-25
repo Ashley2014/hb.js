@@ -353,6 +353,21 @@ gulp.task("hb.account.dev2", function(callback) {
     });
 });
 
+gulp.task("hb.js.v2.dev", function(callback) {
+
+    // run webpack
+    var webpackConfig=require('./hb.jsv2/webpack.config.dev.js');
+
+
+    webpack( webpackConfig, function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
+        //gutil.log("[webpack]", "Gonna sit around and watch for file changes. CTRL^C to kill me");
+        //callback();
+    });
+});
 
 
 
