@@ -16,7 +16,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: ["style", "css",'autoprefixer?{browsers:["> 0%"]}',"sass"]
+                loaders: ["style", "css",'postcss',"sass"]
             },
             { test: /\.jade$/, loader: "jade-html" },
             {
@@ -29,11 +29,17 @@ module.exports = {
             }
         ]
     },
+    postcss: function () {
+        return {
+            defaults: [ autoprefixer],
+            cleaner:  [autoprefixer({ browsers: ["> 0%"] })]
+        };
+    },
     externals: {
         // require("jquery") is external and available
         //  on the global var jQuery
         "jquery": "jQuery",
-        "hb": "hb",
+        //"hb": "hb",
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({

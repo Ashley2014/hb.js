@@ -31,13 +31,13 @@ module.exports = {
     resolve: {
         alias: {
             // require('tinymce') will do require('tinymce/tinymce')
-            url: '../bower_components/js-url/url.js',
+            //url: '../bower_components/js-url/url.js',
         },
     },
     externals: {
         // require("jquery") is external and available
         //  on the global var jQuery
-        //"jquery": "jQuery",
+        "jquery": "jQuery",
     },
     postcss: function () {
         return {

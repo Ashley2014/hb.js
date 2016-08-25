@@ -369,6 +369,17 @@ gulp.task("hb.js.v2.dev", function(callback) {
     });
 });
 
+gulp.task("hb.js.v2", function(callback) {
+
+    var webpackConfig=require('./hb.jsv2/webpack.config.js');
+    return gulp.src('hb.jsv2/entry.js')
+        .pipe(webpackStream( webpackConfig ))
+        .pipe(gulp.dest('hb.jsv2/'))
+        .pipe(plugins.rename("hb.min.js"))
+        .pipe(gulp.dest('hb.jsv2/dist'))
+        ;
+});
+
 
 
 gulp.task('lib', function(){
