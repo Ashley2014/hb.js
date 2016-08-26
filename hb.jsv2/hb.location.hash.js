@@ -13,24 +13,35 @@ var hash = (function() {
             var a = params[i].split("=");
             paramsObject[a[0]] =  decodeURIComponent(a[1]);
         }
+        //console.log(paramsObject)
         return paramsObject;
     };
 
     var toHash = function(params) {
-        var str = [];
-        for(var p in params) {
-            str.push(p + "=" + encodeURIComponent(params[p]));
+        if(typeof params=='undefined'){
+            window.location.hash = '';
+        }else if(typeof params=='string'){
+            window.location.hash = params;
+        }else{
+            let str = [];
+            for(let p in params) {
+                str.push(p + "=" + encodeURIComponent(params[p]));
+            }
+            window.location.hash = str.join("&");
         }
-        window.location.hash = str.join("&");
     };
 
     return {
         get: function(param) {
-            var params = fromHash();
-            if (param) {
-                return params[param];
-            } else {
-                return params;
+            if(param=='hash'){
+                return  window.location.hash;
+            }else{
+                let params = fromHash();
+                if (param) {
+                    return params[param];
+                } else {
+                    return params;
+                }
             }
         },
         set: function(param) {

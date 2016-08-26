@@ -17,9 +17,19 @@
         it(`#fff should to rgb(255,255,255)`, function () {
             expect(hb.color.hexToRgb('#fff',true)).toBe('rgb(255,255,255)');
         });
+
         it(`#fff whitout second parameter should to { r: 255, g: 255, b: 255 }`, function () {
             expect(hb.color.hexToRgb('#fff')).toEqual({ r: 255, g: 255, b: 255 });
         });
+
+        it(`#0D0B03 should to rgb(13,11,3)`, function () {
+            expect(hb.color.hexToRgb('#0D0B03',true)).toBe('rgb(13,11,3)');
+        });
+
+        it(`#0D0B03 whitout second parameter should to { r: 13, g: 11, b: 3 }`, function () {
+            expect(hb.color.hexToRgb('#0D0B03')).toEqual({ r: 13, g: 11, b: 3 });
+        });
+
     });
 
     describe("A spec using the fail function", function() {
