@@ -37,5 +37,5 @@ function isMobile(){
 
 
 
-export {browser};
+export default browser;
 

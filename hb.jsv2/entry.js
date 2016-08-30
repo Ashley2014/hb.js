@@ -26,28 +26,28 @@ hb.location={};
 hb.lib={};
 hb.color={};
 //hb.agent=require("./hb.agent");
-import {agent} from "./hb.agent";
+import agent from "./hb.agent";
 //console.log(require("exports?agent!./hb.agent"))
 hb.agent=agent;
 
-import {browser} from "./hb.browser";
+import browser from "./hb.browser";
 hb.browser=browser;
 
 var url=require("exports?url!./url");
 hb.location.url=url;
-import {hash} from "./hb.location.hash";
-hb.location.hash=hash;
+import myHash from "./hb.location.hash";
+hb.location.hash=myHash;
 
 import * as weui from "./hb.lib.weui";
 hb.lib.weui=weui;
 
-import {color} from "./hb.color";
+import color from "./hb.color";
 hb.color=color;
 
-import {util} from "./hb.util";
+import util from "./hb.util";
 hb.util=util;
 
-import {validation} from "./hb.validation";
+import validation from "./hb.validation";
 hb.validation=validation;
 
 var Cookies=require("js-cookie");
@@ -86,7 +86,7 @@ hb.storage = {
     }
 };
 
-import {interval} from "./hb.interval";
+import interval from "./hb.interval";
 hb.interval=interval;
 
 

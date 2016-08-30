@@ -86,4 +86,4 @@ var hash = (function() {
 
 
 
-export {hash};
+export default hash;

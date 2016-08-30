@@ -25,5 +25,5 @@ function interval(fun,delay,count,afterCount){
 }
 
 
-export {interval};
+export default interval;
 

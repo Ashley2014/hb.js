@@ -145,4 +145,4 @@ var Spinner=require("spin.js");
     util.loading=loading;
 })(window, document);
 
-export {util};
+export default util;

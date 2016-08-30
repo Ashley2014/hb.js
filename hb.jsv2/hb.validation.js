@@ -32,5 +32,5 @@ function isEmpty(str){
     }
 };
 
-export {validation};
+export default validation;
 

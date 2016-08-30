@@ -63,5 +63,5 @@ agent.browser=browser;
 agent.os=os;
 
 
-export {agent};
+export default agent;
 //module.exports= agent;

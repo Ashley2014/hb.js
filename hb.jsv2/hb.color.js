@@ -27,4 +27,4 @@ function hexToRgb(hex,isString) {
 color={
     hexToRgb:hexToRgb,
 };
-export {color};
+export default color;
