@@ -93,7 +93,7 @@ hb.interval=interval;
 window.hb=hb;
 
 
-console.log(hb);
+//console.log(hb);
 
 
 
