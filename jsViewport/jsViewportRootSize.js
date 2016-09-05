@@ -33,8 +33,8 @@
         window.addEventListener("orientationchange", function(event){
             //alert(event.orientation);
 
-            deviceWidth=document.documentElement.clientWidth;
-            calSize();
+            //deviceWidth=document.documentElement.clientWidth;
+            //calSize();
 
         });
 
