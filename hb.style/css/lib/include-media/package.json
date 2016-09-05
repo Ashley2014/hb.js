@@ -1,29 +1,59 @@
 {
-  "title": "include-media",
-  "name": "include-media",
-  "version": "1.4.3",
-  "description": "Simple, elegant and maintainable media queries in Sass",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eduardoboucas/include-media.git"
+  "_args": [
+    [
+      {
+        "name": "include-media",
+        "raw": "include-media@^1.4.3",
+        "rawSpec": "^1.4.3",
+        "scope": null,
+        "spec": ">=1.4.3 <2.0.0",
+        "type": "range"
+      },
+      "D:\\dev\\workspace\\hb.js"
+    ]
+  ],
+  "_cnpm_publish_time": 1469812080541,
+  "_from": "include-media@>=1.4.3 <2.0.0",
+  "_id": "include-media@1.4.8",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/include-media",
+  "_nodeVersion": "5.7.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/include-media-1.4.8.tgz_1469812078695_0.8835054177325219"
   },
-  "main": "index.js",
+  "_npmUser": {
+    "email": "mail@eduardoboucas.com",
+    "name": "eduardoboucas"
+  },
+  "_npmVersion": "3.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "include-media",
+    "raw": "include-media@^1.4.3",
+    "rawSpec": "^1.4.3",
+    "scope": null,
+    "spec": ">=1.4.3 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/include-media/download/include-media-1.4.8.tgz",
+  "_shasum": "5d8d7735c2413e7ab3938bd23c024c6113f5c1b8",
+  "_shrinkwrap": null,
+  "_spec": "include-media@^1.4.3",
+  "_where": "D:\\dev\\workspace\\hb.js",
   "author": {
-    "name": "Eduardo Boucas",
-    "email": "mail@eduardoboucas.com"
+    "email": "mail@eduardoboucas.com",
+    "name": "Eduardo Boucas"
   },
   "bugs": {
     "url": "https://github.com/eduardoboucas/include-media/issues"
   },
-  "homepage": "http://include-media.com",
-  "scripts": {
-    "test": "gulp test",
-    "lint": "scss-lint . --config ./.scss-lint.yml"
-  },
-  "license": "MIT",
-  "pre-commit": [
-    "test"
-  ],
+  "dependencies": {},
+  "description": "Simple, elegant and maintainable media queries in Sass",
   "devDependencies": {
     "gh-pages": "^0.3.0",
     "gulp": "^3.9.0",
@@ -37,38 +67,50 @@
     "pre-commit": "^1.0.7",
     "sassdoc": "^2.1.13"
   },
-  "gitHead": "faeed705731dc4d5419280d2edb09524ac5bfb3a",
-  "_id": "include-media@1.4.3",
-  "_shasum": "55fcec2cb932d7ee17ba71967e6477ecef1459bd",
-  "_from": "include-media@latest",
-  "_npmVersion": "2.14.3",
-  "_nodeVersion": "4.1.0",
-  "_npmUser": {
-    "name": "eduardoboucas",
-    "email": "mail@eduardoboucas.com"
+  "directories": {},
+  "dist": {
+    "noattachment": false,
+    "shasum": "5d8d7735c2413e7ab3938bd23c024c6113f5c1b8",
+    "size": 11719,
+    "tarball": "http://registry.npm.taobao.org/include-media/download/include-media-1.4.8.tgz"
   },
+  "eyeglass": {
+    "exports": "eyeglass-exports.js",
+    "needs": "*"
+  },
+  "gitHead": "b76b71aabf9f4251d899d2b74ad41d995d45ef4c",
+  "homepage": "http://include-media.com",
+  "keywords": [
+    "sass",
+    "eyeglass-module"
+  ],
+  "license": "MIT",
+  "main": "index.js",
   "maintainers": [
     {
-      "name": "eduardoboucas",
-      "email": "mail@eduardoboucas.com"
+      "email": "mail@eduardoboucas.com",
+      "name": "eduardoboucas"
     },
     {
-      "name": "hugogiraudel",
-      "email": "hugo.giraudel@gmail.com"
+      "email": "hugo.giraudel@gmail.com",
+      "name": "hugogiraudel"
     }
   ],
-  "dist": {
-    "shasum": "55fcec2cb932d7ee17ba71967e6477ecef1459bd",
-    "size": 11704,
-    "noattachment": false,
-    "tarball": "http://registry.npm.taobao.org/include-media/download/include-media-1.4.3.tgz"
+  "name": "include-media",
+  "optionalDependencies": {},
+  "pre-commit": [
+    "test"
+  ],
+  "publish_time": 1469812080541,
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardoboucas/include-media.git"
   },
-  "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/include-media-1.4.3.tgz_1462997591368_0.2982024683151394"
+  "scripts": {
+    "lint": "scss-lint . --config ./.scss-lint.yml",
+    "test": "gulp test"
   },
-  "directories": {},
-  "publish_time": 1462997592890,
-  "_cnpm_publish_time": 1462997592890,
-  "_resolved": "https://registry.npm.taobao.org/include-media/download/include-media-1.4.3.tgz"
+  "title": "include-media",
+  "version": "1.4.8"
 }
