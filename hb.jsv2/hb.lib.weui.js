@@ -243,4 +243,4 @@ var weui=(function(){
     };
 }());
 
-export {weui};
+export default weui;

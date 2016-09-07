@@ -38,7 +38,8 @@ hb.location.url=url;
 import myHash from "./hb.location.hash";
 hb.location.hash=myHash;
 
-import * as weui from "./hb.lib.weui";
+//import * as weui from "./hb.lib.weui";
+import weui from "./hb.lib.weui";
 hb.lib.weui=weui;
 
 import color from "./hb.color";
