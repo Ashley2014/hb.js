@@ -111,6 +111,21 @@ var Spinner=require("spin.js");
     util.pad=pad;
 })(window, document);
 
+
+(function(window,document,undefined) {
+    "use strict";
+    /*
+     *
+     *getRandomInt(0, 9)
+     */
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    util.getRandomInt=getRandomInt;
+})(window, document);
+
+
+
 /*
  hb.util.loading
  require spin.js
