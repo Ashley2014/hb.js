@@ -284,8 +284,8 @@
 
 
 
-                console.log('ev.center.x,leftGap,lNow',ev.center.x,leftGap,lNow);
-                console.log('ev.center.y,topGap,tNow',ev.center.y,topGap,tNow);
+                //console.log('ev.center.x,leftGap,lNow',ev.center.x,leftGap,lNow);
+                //console.log('ev.center.y,topGap,tNow',ev.center.y,topGap,tNow);
 
 
                 //console.log('lNow,tNow',lNow,tNow);
