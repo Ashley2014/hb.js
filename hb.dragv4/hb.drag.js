@@ -251,29 +251,38 @@
 
             if(scaleNow!=_this.settings.maxScale&&scaleNow!=_this.settings.minScale){
 
+
                 //center={
-                //    x:ev.center.x-leftGap,
-                //    y:ev.center.y-topGap,
+                //    x:(ev.center.x-leftGap),
+                //    y:(ev.center.y-topGap),
                 //};
+                //
+                //var objCenter={
+                //    x:(center.x-lNow)/scaleNow,
+                //    y:(center.y-tNow)/scaleNow,
+                //}
+                //
+                //lNow=-(objCenter.x*deltaScale);
+                //tNow=-(objCenter.y*deltaScale);
+
 
 
                 center={
-                    x:(ev.center.x-leftGap-lNow),
-                    y:(ev.center.y-topGap-tNow),
+                    x:(ev.center.x/scaleNow-leftGap-lNow/scaleNow),
+                    y:(ev.center.y/scaleNow-topGap-tNow/scaleNow),
                 };
 
+                lNow=-(center.x*deltaScale)+lNow;
+                tNow=-(center.y*deltaScale)+tNow;
+
+                //var cx=-(objParentWidth-objWidth*scaleNow)/2
+                //var cy=-(objParentHeight-objHeight*scaleNow)/2
+                ////
+                ////
+                //lNow=-cx
+                //tNow=-cy
 
 
-
-
-
-                //
-                //lNow=-(center.x*scaleNow-center.x);
-                //tNow=-(center.y*scaleNow-center.y);
-
-
-                lNow=-(center.x*deltaScale/2)+lNow;
-                tNow=-(center.y*deltaScale/2)+tNow;
 
                 console.log('ev.center.x,leftGap,lNow',ev.center.x,leftGap,lNow);
                 console.log('ev.center.y,topGap,tNow',ev.center.y,topGap,tNow);
