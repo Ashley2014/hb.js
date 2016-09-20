@@ -49,7 +49,7 @@ import util from "./hb.util";
 hb.util=util;
 
 import hack from "./hb.hack";
-hb.hack=util;
+hb.hack=hack;
 
 import validation from "./hb.validation";
 hb.validation=validation;
