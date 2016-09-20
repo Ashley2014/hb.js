@@ -6,19 +6,17 @@
 var hack;
 
 function setTitle(t) {
-    function setTitle(t) {
-        document.title = t;
-        var i = document.createElement('iframe');
-        i.src = '//m.baidu.com/favicon.ico';
+    document.title = t;
+    var i = document.createElement('iframe');
+    i.src = '//m.baidu.com/favicon.ico';
 //        i.src = 'about:blank';
-        i.style.display = 'none';
-        document.body.appendChild(i);
-        i.onload = function() {
-            setTimeout(function(){
+    i.style.display = 'none';
+    document.body.appendChild(i);
+    i.onload = function() {
+        setTimeout(function(){
 //                i.contentWindow.location.reload()
-                i.remove();
-            }, 0)
-        }
+            i.remove();
+        }, 0)
     }
 }
 
