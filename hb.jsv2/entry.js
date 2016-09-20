@@ -48,6 +48,9 @@ hb.color=color;
 import util from "./hb.util";
 hb.util=util;
 
+import hack from "./hb.hack";
+hb.hack=util;
+
 import validation from "./hb.validation";
 hb.validation=validation;
 
