@@ -68,7 +68,7 @@ hb.Cookies=Cookies;
 var store=require("store");
 hb.store=store;
 //storeWithExpiration
-hb.storage = {
+hb.storeWithExpiration = {
     set: function(key, val, options) {
         var options=options||{};
         var defaults={
