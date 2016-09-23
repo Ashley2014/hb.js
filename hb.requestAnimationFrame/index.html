@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+    document.write('<script type="text/javascript" src="hb.raf-compiled.js?v='+new Date('2015').getTime()+'"><\/script>');
+</script>
+<script>
+    raf(function(){
+        console.log(1)
+    },1000)
+</script>
+</body>
+</html>

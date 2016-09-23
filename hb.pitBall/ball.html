@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>ball</title>
+</head>
+<body>
+<style>
+    .canvas{
+        border: 1px solid #999;
+        box-sizing: border-box;
+    }
+</style>
+<div>
+    ball
+</div>
+<canvas class="canvas" id="canvas" width="300" height="400">
+    Man, this page would look SO awesome if your browser supported canvas.
+</canvas>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+<!--<script src="ball-compiled.js"></script>-->
+<script>
+    document.write('<script type="text/javascript" src="ball-compiled.js?v='+new Date('2015').getTime()+'"><\/script>');
+</script>
+<script>
+    hbBounceBall('#canvas')
+</script>
+</body>
+</html>
