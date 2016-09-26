@@ -1,6 +1,18 @@
-;(function(){
-    'use strict';
-
+;(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory();
+    } else {
+        var OldRaf = window.hbBounceBall;
+        var api = window.hbBounceBall = factory();
+        api.noConflict = function () {
+            window.hbBounceBall = OldRaf;
+            return api;
+        };
+    }
+}(function () {
+    "use strict";
     function extend() {
 
         // Variables
@@ -34,9 +46,7 @@
             var obj = arguments[i];
             merge(obj);
         }
-
         return extended;
-
     }
 
 
@@ -56,12 +66,11 @@
         }
     }
 
-
     class BounceBall {
         constructor(dom,options) {
             options=options||{};
             var defaults={
-                loopClassName:'loop-active',
+                data:[],
                 loopNumber:5,
                 speed:1000
             };
@@ -75,30 +84,30 @@
         }
 
         init() {
-            var canvas=this.element
+            var canvas=this.element;
             var ctx=canvas.getContext('2d');
 
-            ctx.lineJoin='round';
-            ctx.lineWidth=2;
-            ctx.font='24px Arial,Microsoft YaHei,sans-serif';
-            ctx.fillText('24px 缩放 Microsoft',15,40);
-            ctx.strokeRect(20,60,50,50);
-            ctx.fillRect(5,5,10,10);
 
+            ctx.lineWidth=1;
+            ctx.font='24px Arial,Microsoft YaHei,sans-serif';
             ctx.beginPath();
-            ctx.arc(100, 300, 20, 0, 2 * Math.PI);
-            ctx.lineWidth = 1;
+
+
+            ctx.arc(100, 300, 50, 0, 2 * Math.PI);
+
+            ctx.fillText('小明',100, 300);
+
             ctx.strokeStyle = '#003300';
             ctx.stroke();
         }
-
 
     }
 
 
 
-    window.hbBounceBall=function(dom,options){
+    return function(dom,options){
         return new BounceBall(dom,options);
     };
 
-}());
+}));
+

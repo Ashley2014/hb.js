@@ -26,7 +26,37 @@
     document.write('<script type="text/javascript" src="ball-compiled.js?v='+new Date().getTime()+'"><\/script>');
 </script>
 <script>
-    hbBounceBall('#canvas')
+    var user=[
+        {
+            name:"小刚1",
+            avatar:"http://wx.qlogo.cn/mmopen/NGE7DQPnAIVCY5NgcM393Fvpe5nqicOLVcynq4CPU1dnOGG0ZjHzeB8c0zOGLEB2kgwFicyIvoZXIxPWxhXwaYzJEdQ8SzMzI9/0",
+        }
+    ,
+        {
+            name:"小刚2",
+            avatar:"http://wx.qlogo.cn/mmopen/NGE7DQPnAIVCY5NgcM393OibsA35AXcFwpPffee4PI2IoNGTrnmsrBHQCGmxicxkx7LoLF6ib64aibibLzibGXj8FbnqyicYTTmnrTU/0",
+        }
+    ,
+        {
+            name:"小刚3",
+            avatar:"http://wx.qlogo.cn/mmopen/Q3auHgzwzM53d8REAex0iaiad1rl58PetxgZ8KVVuDV1Euia7H5ODYcwPcs02O9GKFjujb3Lh9NOVyCOuo0s94Ueg/0",
+        }
+    ,
+        {
+            name:"小刚4",
+            avatar:"http://wx.qlogo.cn/mmopen/YZjIPyEJ6icic7qlkupUPPiaaKsO0eudw6w9xibGoeOJ28ib4ftxN0k5JyL9p72n7VTCXEOtJveArDBJRWYMzHF8JTictzVAqMZhc3/0",
+        }
+    ,
+        {
+            name:"小刚5",
+            avatar:"http://wx.qlogo.cn/mmopen/ibuiacbAZyaB9AcmTufdlQyr6mz5lNeNosKHRhgYZk1wwKJY1FibE9Nt6S4pJKj9ra8sNUCM7BLUiaBNDUwia7mCftEQMtn784yUX/0",
+        }
+    ]
+</script>
+<script>
+    hbBounceBall('#canvas',{
+        data:user
+    })
 </script>
 </body>
 </html>
