@@ -19,67 +19,76 @@
         window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
             || window[vendors[x]+'CancelRequestAnimationFrame'];
     }
-    var raf={
-        start:null,
-        cancel:null,
-    };
-    var pureRaf= window.requestAnimationFrame;
 
-    if(pureRaf){
-        let isCancel=false;
-        raf.cancel=function(){
-            isCancel=true;
-            return window.cancelAnimationFrame;
-        };
+    //var raf={
+    //    init:null,
+    //    start:null,
+    //    cancel:null,
+    //};
 
-        raf.start=function(fun,speed){
-            var cancel;
-            var now;
-            var then = Date.now();
-            var delta;
 
-            function go() {
-                if(!isCancel){
-                    cancel=pureRaf(go);
-                    now = Date.now();
-                    delta = now - then;
+    class RafClass{
+        constructor() {
+            var pureRaf= window.requestAnimationFrame;
+            if(pureRaf){
+                let timer={};
+                this.cancel=function(t){
+                    //console.log(t.timer)
+                    window.cancelAnimationFrame(t.timer);
+                };
 
-                    if (delta > speed) {
-                        // 这里不能简单then=now，否则还会出现上边简单做法的细微时间差问题。
-                        // 例如fps=10，每帧100ms，而现在每16ms（60fps）执行一次draw。16*7=112>100，需要7次才实际绘制一次。
-                        // 这个情况下，实际10帧需要112*10=1120ms>1000ms才绘制完成。
-                        then = now - (delta % speed);
-                        fun()
+                this.start=function(fun,speed){
+                    var now;
+                    var then = Date.now();
+                    var delta;
+
+                    function go() {
+                        timer.timer=pureRaf(go);
+                        now = Date.now();
+                        delta = now - then;
+
+                        if (delta > speed) {
+                            // 这里不能简单then=now，否则还会出现上边简单做法的细微时间差问题。
+                            // 例如fps=10，每帧100ms，而现在每16ms（60fps）执行一次draw。16*7=112>100，需要7次才实际绘制一次。
+                            // 这个情况下，实际10帧需要112*10=1120ms>1000ms才绘制完成。
+                            then = now - (delta % speed);
+                            fun()
+                        }
+                        return timer;
                     }
-
+                    return go();
                 }
-                return cancel;
-            }
-            return go();
-        }
-    }else{
-        //raf.cancel=window.clearTimeout;
-        let isCancel=false;
-        let timer;
-        raf.cancel=function(){
-            isCancel=true;
-            return window.clearTimeout;
-        };
-        raf.start=function(fun,speed){
-            function go(){
-                if(!isCancel) {
-                    fun();
-                    timer= setTimeout(go, speed);
+            }else{
+                //raf.cancel=window.clearTimeout;
+
+                let timer={};
+                this.cancel=function(t){
+                    window.clearTimeout(t.timer);
+                };
+                this.start=function(fun,speed){
+                    function go(){
+                        fun();
+                        timer.timer= setTimeout(go, speed);
+                        return timer
+                    }
+                    return go();
                 }
-                return timer
+
+
             }
-            return go();
+
+
         }
-
-
     }
 
-    return raf;
+
+
+
+    return {
+        init:function(){
+            return new RafClass()
+        }
+    };
 }));
 
 
