@@ -19,42 +19,67 @@
         window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
             || window[vendors[x]+'CancelRequestAnimationFrame'];
     }
-    var raf;
-
+    var raf={
+        start:null,
+        cancel:null,
+    };
     var pureRaf= window.requestAnimationFrame;
+
     if(pureRaf){
-        raf=function(fun,speed){
+        let isCancel=false;
+        raf.cancel=function(){
+            isCancel=true;
+            return window.cancelAnimationFrame;
+        };
+
+        raf.start=function(fun,speed){
             var cancel;
             var now;
             var then = Date.now();
             var delta;
 
-            go();
             function go() {
-                cancel=pureRaf(go);
-                now = Date.now();
-                delta = now - then;
-                if (delta > speed) {
-                    // 这里不能简单then=now，否则还会出现上边简单做法的细微时间差问题。
-                    // 例如fps=10，每帧100ms，而现在每16ms（60fps）执行一次draw。16*7=112>100，需要7次才实际绘制一次。
-                    // 这个情况下，实际10帧需要112*10=1120ms>1000ms才绘制完成。
-                    then = now - (delta % speed);
-                    fun()
+                if(!isCancel){
+                    cancel=pureRaf(go);
+                    now = Date.now();
+                    delta = now - then;
+
+                    if (delta > speed) {
+                        // 这里不能简单then=now，否则还会出现上边简单做法的细微时间差问题。
+                        // 例如fps=10，每帧100ms，而现在每16ms（60fps）执行一次draw。16*7=112>100，需要7次才实际绘制一次。
+                        // 这个情况下，实际10帧需要112*10=1120ms>1000ms才绘制完成。
+                        then = now - (delta % speed);
+                        fun()
+                    }
+
                 }
+                return cancel;
             }
-            return cancel;
+            return go();
         }
     }else{
-        raf=function(fun,speed){
-            go();
-            function go () {
-                fun();
-                setTimeout(go,speed);
+        //raf.cancel=window.clearTimeout;
+        let isCancel=false;
+        let timer;
+        raf.cancel=function(){
+            isCancel=true;
+            return window.clearTimeout;
+        };
+        raf.start=function(fun,speed){
+            function go(){
+                if(!isCancel) {
+                    fun();
+                    timer= setTimeout(go, speed);
+                }
+                return timer
             }
+            return go();
         }
+
+
     }
 
-    return raf
+    return raf;
 }));
 
 

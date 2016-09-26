@@ -3,17 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #stop{
+            width: 100px;
+            height: 50px;
+            font-size: 30px;
+        }
+    </style>
 </head>
 <body>
-
+<button id="stop">stop</button>
 
 <script>
-    document.write('<script type="text/javascript" src="hb.raf-compiled.js?v='+new Date('2015').getTime()+'"><\/script>');
+    document.write('<script type="text/javascript" src="hb.raf-compiled.js?v='+new Date().getTime()+'"><\/script>');
 </script>
 <script>
-    raf(function(){
-        console.log(1)
+    var a=1;
+    var timer;
+    timer=raf.start(function(){
+
+        a++;
+        console.log(a)
+//        console.log(timer)
+//        console.log(raf.cancel)
+        if(a==10){
+            raf.cancel(timer)
+        }
     },1000)
+
+
+document.querySelector("#stop").addEventListener('click',function(){
+    raf.cancel(timer)
+},false)
+
+
+
 </script>
 </body>
 </html>
