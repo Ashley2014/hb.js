@@ -60,10 +60,15 @@
             this.x = Math.random() * width;
             this.y = Math.random() * height;
         }
+    }
 
-        toString() {
-            return '(' + this.x + ', ' + this.y + ')';
-        }
+    function drawBall(canvas){
+
+        var ctx=canvas.getContext('2d');
+        var w=canvas.width;
+        var h=canvas.height;
+
+        ctx.arc(100, 300, 50, 0, 2 * Math.PI);
     }
 
     class BounceBall {
@@ -93,7 +98,9 @@
             ctx.beginPath();
 
 
-            ctx.arc(100, 300, 50, 0, 2 * Math.PI);
+            drawBall(canvas)
+
+
 
             ctx.fillText('小明',100, 300);
 
