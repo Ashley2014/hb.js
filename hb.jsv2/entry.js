@@ -42,6 +42,17 @@ hb.location.hash=myHash;
 import weui from "./hb.lib.weui";
 hb.lib.weui=weui;
 
+var Cookies=require("js-cookie");
+Cookies.withConverter({
+    write: function (value) {
+        return encodeURIComponent(value);
+    },
+    read: function (value) {
+        return decodeURIComponent(value);
+    }
+});
+
+hb.Cookies=Cookies;
 import color from "./hb.color";
 hb.color=color;
 
@@ -54,16 +65,7 @@ hb.hack=hack;
 import validation from "./hb.validation";
 hb.validation=validation;
 
-var Cookies=require("js-cookie");
-Cookies.withConverter({
-    write: function (value) {
-        return encodeURIComponent(value);
-    },
-    read: function (value) {
-        return decodeURIComponent(value);
-    }
-});
-hb.Cookies=Cookies;
+
 
 var store=require("store");
 hb.store=store;
