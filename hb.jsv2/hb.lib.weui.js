@@ -25,16 +25,16 @@ var weui=(function(){
 
         var alertHtmlStr='' +
             '<div class="weui_dialog_alert" >'+
-            '<div class="weui_mask"></div>'+
-            '<div class="weui_dialog" style="display: none;" >'+
-            '<div class="weui_dialog_hd"><strong class="weui_dialog_title">'+
+            '<div class="weui_mask weui-mask"></div>'+
+            '<div class="weui_dialog weui-dialog" style="display: none;" >'+
+            '<div class="weui_dialog_hd weui-dialog__hd"><strong class="weui_dialog_title weui-dialog__title">'+
             settings.title+
             '</strong></div>' +
-            '<div class="weui_dialog_bd">'+
+            '<div class="weui_dialog_bd weui-dialog__bd">'+
             settings.content +
             '</div>' +
-            '<div class="weui_dialog_ft">' +
-            '<a href="javascript:;" class="weui_btn_dialog primary">'+settings.btn +'</a>' +
+            '<div class="weui_dialog_ft weui-dialog__ft">' +
+            '<a href="javascript:;" class="weui_btn_dialog primary weui-dialog__btn weui-dialog__btn_primary">'+settings.btn +'</a>' +
             '</div>' +
             ' </div>' +
             ' </div>' +
@@ -70,13 +70,13 @@ var weui=(function(){
         var settings = $.extend( {},defaults, options );
         var confirmHtmlStr=`
                     <div class="weui_dialog_confirm">
-                    <div class="weui_mask"></div>
-                    <div class="weui_dialog">
-                    <div class="weui_dialog_hd"><strong class="weui_dialog_title">${settings.title}</strong></div>
-                    <div class="weui_dialog_bd">${settings.content}</div>
-                    <div class="weui_dialog_ft">
-                    <a href="javascript:;" class="weui_btn_dialog default">${settings.leftBtn}</a>
-                    <a href="javascript:;" class="weui_btn_dialog primary">${settings.rightBtn}</a>
+                    <div class="weui_mask weui-mask"></div>
+                    <div class="weui_dialog weui-dialog">
+                    <div class="weui_dialog_hd weui-dialog__hd"><strong class="weui_dialog_title weui-dialog__title">${settings.title}</strong></div>
+                    <div class="weui_dialog_bd weui-dialog__bd">${settings.content}</div>
+                    <div class="weui_dialog_ft weui-dialog__ft">
+                    <a href="javascript:;" class="weui_btn_dialog default weui-dialog__btn weui-dialog__btn_default">${settings.leftBtn}</a>
+                    <a href="javascript:;" class="weui_btn_dialog primary weui-dialog__btn weui-dialog__btn_primary">${settings.rightBtn}</a>
                     </div>
                     </div>
                     </div>
