@@ -22,6 +22,8 @@ function interval(fun,delay,count,afterCount){
             afterCount();
         }
     }
+
+    return _clear
 }
 
 

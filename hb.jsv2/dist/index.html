@@ -32,6 +32,28 @@
     //})
 
     hb.store.set('qqq',{a:1})
+    var aa=60
+    var ca=hb.interval(function () {
+        aa--;
+        console.log(aa)
+    },1000,6000,function () {
+
+    });
+    setTimeout(function(){
+        console.log(ca)
+        ca();
+    },5000)
+    var aa2=30
+    var ca2=hb.interval(function () {
+        aa2--;
+        console.log(aa2)
+    },1000,6000,function () {
+
+    });
+//    setTimeout(function(){
+//        console.log(ca2)
+//        ca2();
+//    },5000)
 </script>
 </body>
 </html>
