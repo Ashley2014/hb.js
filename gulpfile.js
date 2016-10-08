@@ -209,12 +209,12 @@ gulp.task('hb.jquery', function () {
 
 gulp.task('hb.angular.pack', function () {
     var timestamp=new Date().getTime();
-    var version='1.0.0';
+    var version='1.0.1';
     var banner = `/**
      * version: ${version}
-     * 1.5.5 angular,angular-animate,angular-messages,angular-resource,angular-sanitize,angular-touch
-     * 0.2.18 angular-ui-router
-     * 1.3.2 ui-bootstrap.tpl
+     * 1.5.8 angular,angular-animate,angular-messages,angular-resource,angular-sanitize,angular-touch
+     * 0.3.1 angular-ui-router
+     * 2.1.4  ui-bootstrap.tpl
      */\n`;
 
     return gulp.src([
@@ -239,13 +239,13 @@ gulp.task('hb.angular.pack', function () {
 
 gulp.task('hb.jquery.angular.pack', function () {
     var timestamp=new Date().getTime();
-    var version='1.0.0';
+    var version='1.0.1';
     var banner = `/**
      * version: ${version}
      * 2.2.3 jquery
-     * 1.5.5 angular,angular-animate,angular-messages,angular-resource,angular-sanitize,angular-touch
-     * 0.2.18 angular-ui-router
-     * 1.3.2 ui-bootstrap.tpl
+     * 1.5.8 angular,angular-animate,angular-messages,angular-resource,angular-sanitize,angular-touch
+     * 0.3.1 angular-ui-router
+     * 2.1.4 ui-bootstrap.tpl
      */\n`;
     return gulp.src([
         'node_modules/jquery/dist/jquery.js',
