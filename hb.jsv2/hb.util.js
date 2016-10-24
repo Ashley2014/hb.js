@@ -112,6 +112,25 @@ var Spinner=require("spin.js");
 })(window, document);
 
 
+/*
+ *
+ * 全角算2个字符
+ */
+(function(window,document,undefined) {
+    "use strict";
+    /*
+     *
+     *
+     */
+    function len (str, max) {
+        var char = str.replace(/[^\u0000-\u00FF]/g, '**');
+        return char.length;
+    }
+
+    util.len=len;
+})(window, document);
+
+
 (function(window,document,undefined) {
     "use strict";
     /*

@@ -4,6 +4,7 @@
  */
 var validation={
     checkPhone:checkPhone,
+    checkFullShape:checkFullShape,
     isEmpty:isEmpty,
 };
 
@@ -20,6 +21,14 @@ function checkPhone(num){
     }else{
         return true;
     }
+};
+
+
+
+function checkFullShape(str){
+    //检查是否全角
+    var reg = /[^\u0000-\u00FF]/;
+    return reg.test(str);
 };
 
 
