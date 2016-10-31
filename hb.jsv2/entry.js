@@ -42,6 +42,9 @@ hb.location.hash=myHash;
 import weui from "./hb.lib.weui";
 hb.lib.weui=weui;
 
+import iui from "./hb.lib.iui";
+hb.lib.iui=iui;
+
 var Cookies=require("js-cookie");
 Cookies.withConverter({
     write: function (value) {
