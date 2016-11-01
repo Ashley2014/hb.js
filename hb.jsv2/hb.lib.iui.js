@@ -150,7 +150,7 @@ var iui=(function(){
 
         var settings = $.extend( {},defaults, options );
         var confirmHtmlStr=`
-    <div id="iui-pop-alert" class="${styles['mui-popup']} " style="display: block;">
+    <div id="iui-pop-alert" class="${styles['mui-popup']} " >
     <div class="${styles['mui-popup-inner']}">
     <div class="${styles['mui-popup-title']}">${settings.title}</div>
     <div class="${styles['mui-popup-text']}">${settings.content}</div></div>
