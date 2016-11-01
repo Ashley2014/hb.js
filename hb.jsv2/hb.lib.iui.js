@@ -107,7 +107,7 @@ var iui=(function(){
         var settings = $.extend( {},defaults, options );
 
         var alertHtmlStr=`
-    <div id="iui-pop-alert" class="${styles['mui-popup']} " style="display: block;">
+    <div id="iui-pop-alert" class="${styles['mui-popup']} " >
     <div class="${styles['mui-popup-inner']}">
     <div class="${styles['mui-popup-title']}">${settings.title}</div>
     <div class="${styles['mui-popup-text']}">${settings.content}</div></div>
@@ -119,9 +119,9 @@ var iui=(function(){
         `;
         var $alertHtml=$(alertHtmlStr);
         $("body").append($alertHtml);
-        setTimeout(function(){
-            $("#iui-pop-alert").addClass(styles['mui-popup-in']);
-        });
+        //setTimeout(function(){
+            $("#iui-pop-alert").show(0).addClass(styles['mui-popup-in']);
+        //});
         //$alertHtml.find(`.${styles['mui-popup-button']}`).fadeIn(200);
         var $confirmBt=$alertHtml.find(`.${styles['mui-popup-button']}`);
         $confirmBt.on('click',function(){
@@ -163,9 +163,7 @@ var iui=(function(){
 
         var $confirmHtml=$(confirmHtmlStr);
         $("body").append($confirmHtml);
-        setTimeout(function(){
-            $("#iui-pop-alert").addClass(styles['mui-popup-in']);
-        });
+        $("#iui-pop-alert").show(0).addClass(styles['mui-popup-in']);
         //$confirmHtml.find(".weui-dialog").fadeIn(200);
         var $confirmBt=$confirmHtml.find("#iui-pop-confirm-right");
         $confirmBt.on('click',function(){
