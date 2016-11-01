@@ -305,3 +305,10 @@
     -webkit-transform: rotate3d(0, 0, 1, 360deg);
   }
 }
+
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
