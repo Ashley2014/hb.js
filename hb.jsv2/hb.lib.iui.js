@@ -24,40 +24,8 @@
                 document.removeEventListener("DOMContentLoaded",myFun,false)
                 fn()
             },false)
-        }else if(document.attachEvent){
-            IEContentLoaded (window, fn)
         }
 
-        function IEContentLoaded (w, fn) {
-            var d = w.document, done = false,
-            // only fire once
-                init = function () {
-                    if (!done) {
-                        done = true
-                        fn()
-                    }
-                }
-            // polling for no errors
-                ;(function myFun() {
-                try {
-                    // throws errors until after ondocumentready
-                    d.documentElement.doScroll('left')
-                } catch (e) {
-                    setTimeout(myFun, 50)
-                    return
-                }
-                // no errors, fire
-
-                init()
-            })()
-            // trying to always fire before onload
-            d.onreadystatechange = function() {
-                if (d.readyState == 'complete') {
-                    d.onreadystatechange = null
-                    init()
-                }
-            }
-        }
     }
 
     /**
@@ -117,14 +85,7 @@
 })(window)
 import styles from "./style.scss";
 //confirm('aaa')
-console.log(styles)
-$('body').append(`
-<div class="${styles.lg1}">
-ewrewr
-<div class="${styles.inner}">334</div>
-</div>
-<div class="${styles.inner}">333</div>
-`);
+
 
 var iui=(function(){
     var _alert=function(options){
