@@ -141,6 +141,18 @@ gulp.task('hb.drag', function () {
         //.pipe(sourcemaps.write('../maps/less'))
         .pipe(gulp.dest('dist'));
 });
+gulp.task('hb.dragv4', function () {
+    return gulp.src('hb.drag/hb.drag.js')
+        //.pipe(sourcemaps.init())
+        .pipe(gulp.dest('dist'))
+        .pipe(plugins.babel({
+            presets: ['es2015']
+        }))
+        .pipe(plugins.uglify())
+        .pipe(plugins.rename("hb.drag.min.js"))
+        //.pipe(sourcemaps.write('../maps/less'))
+        .pipe(gulp.dest('dist'));
+});
 gulp.task('hb.loopClass', function () {
     return gulp.src('hb.loopClass/hb.loopClass.js')
         //.pipe(sourcemaps.init())

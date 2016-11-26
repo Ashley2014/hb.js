@@ -58,8 +58,12 @@
 
         var elementParentRect =$elementParent.get()[0].getBoundingClientRect();
 
+        console.log(elementParentRect.top)
+        console.log($(window).scrollLeft(),$(window).scrollTop())
+
         var leftGap=objParentBorderLeftWidth+elementParentRect.left;
         var topGap=objParentBorderTopWidth+elementParentRect.top;
+
 
 
         //console.log(leftGap,topGap);
@@ -268,8 +272,8 @@
 
 
                 center={
-                    x:(ev.center.x/scaleNow-leftGap-lNow/scaleNow),
-                    y:(ev.center.y/scaleNow-topGap-tNow/scaleNow),
+                    x:((ev.center.x-leftGap)/scaleNow-lNow/scaleNow),
+                    y:((ev.center.y-topGap)/scaleNow-tNow/scaleNow),
                 };
 
                 lNow=-(center.x*deltaScale)+lNow;
