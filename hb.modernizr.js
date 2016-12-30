@@ -9,5 +9,4 @@
     Modernizr.addTest('weddinge', function () {
         return navigator.userAgent.match(/(weddinge)/g) ? true : false
     });
-
 }());
