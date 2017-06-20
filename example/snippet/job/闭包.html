@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    (function(){
+       "use strict";
+        var farr
+        farr= function(){
+            var result = new Array();
+            for (var i=0; i < 10; i++){
+                result[i] = function(){
+                    return i;
+                };
+                console.log(i,result[i]());
+            }
+            console.log('result[4]()',result[4]());
+            return result;
+        }();
+        console.log('farr[5]()',farr[5]());
+
+    }());
+
+
+</script>
+</body>
+</html>

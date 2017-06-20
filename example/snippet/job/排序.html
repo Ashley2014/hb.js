@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        td,th{
+            padding: 5px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+
+<div ng-app="appSort"  ng-controller="main">
+    <form >
+        name:<input type="text" ng-model="vm.newPerson.name" /><br/>
+        age:<input type="number"  ng-model="vm.newPerson.age" /><br/>
+        gender:
+        <select ng-init="vm.newPerson.gender='男'"  ng-model="vm.newPerson.gender">
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+        <br/>
+        <button ng-click="vm.add(vm.newPerson)">新增</button>
+    </form>
+    <div>
+        <table>
+            <tr>
+                <th ng-click="way=!way;vm.sortName(vm.personList,way);">name</th>
+                <th ng-click="way=!way;vm.sortAge(vm.personList,way)">age</th>
+                <th ng-click="way=!way;vm.sortGender(vm.personList,way)">gender</th>
+                <th ng-click="way=!way;vm.sortId(vm.personList,way)">id</th>
+                <th >edit</th>
+            </tr>
+            <tr ng-repeat="person in vm.personList">
+                <td>{{person.name}}</td>
+                <td>{{person.age}}</td>
+                <td>{{person.gender}}</td>
+                <td>{{person.id}}</td>
+                <td><button ng-click="vm.remove(person)">remove</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+<script src="../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../bower_components/angular/angular.js"></script>
+<script>
+
+</script>
+<script>
+(function(){
+    'use strict';
+    angular.module('appSort',[]).controller('main',function($scope){
+        var vm,getList,init;
+        $scope.vm={};
+        vm=$scope.vm;
+        init=function(){
+            getList();
+        };
+
+        getList=function(){
+            var xhr;
+            console.log('getlist');
+            xhr=new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                //只要 readyState 属性的值由一个值变成另一个值，都会触发一次 readystatechange 事件
+                switch(xhr.readyState){
+                    case 0:
+                        console.log('not open',xhr.readyState);
+                        break;
+                    case 1:
+                        console.log('open',xhr.readyState);
+                        break;
+                    case 2:
+                        console.log('send',xhr.readyState);
+                        break;
+                    case 3:
+                        console.log('receive',xhr.readyState);
+                        break;
+                    case 4:
+                        console.log('done',xhr.readyState,xhr,JSON.parse(this.responseText).data);
+                        vm.personList=JSON.parse(this.responseText).data;
+                        $scope.$apply();
+                        break;
+                    default :
+                        console.log('default',xhr.readyState);
+
+                }
+            };
+            xhr.open('get','http://a.a.a/fakeapi/personList',true);
+            xhr.send(null);
+
+        };
+        vm.add=function(newPerson){
+            console.log('newperson',newPerson);
+            var xhr;
+//            xhr.onreadystatechange = function(){
+//                if (xhr.readyState == 4){
+//                    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+//                        alert(xhr.responseText);
+//                    } else {
+//                        alert("Request was unsuccessful: " + xhr.status);
+//                    }
+//                }
+//            };
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                console.log('this',this,'xhr',xhr);
+                switch(xhr.readyState){
+                    case 0:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        break;
+                    case 1:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        break;
+                    case 2:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        break;
+                    case 3:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        break;
+                    case 4:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        vm.personList.unshift(JSON.parse(this.responseText).data);
+                        $scope.$apply();
+                        break;
+                    default :
+                        console.log('default',xhr.readyState);
+                }
+            };
+
+            xhr.open("get", "http://a.a.a/fakeapi/person/create?"+ $.param(newPerson,true), true);
+
+            xhr.send(null);
+
+
+
+        };
+        vm.remove=function(person){
+            console.log('person',person);
+            var xhr;
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                console.log('this',this,'xhr',xhr);
+                switch(xhr.readyState){
+                    case 0:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        break;
+                    case 1:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        break;
+                    case 2:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        break;
+                    case 3:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        break;
+                    case 4:
+                        console.log('xhr.readyState',xhr.readyState,xhr);
+                        (function(){
+                            var index;
+                            for(var i= 0;i<vm.personList.length;i++){
+                                if(vm.personList[i].id===person.id){
+                                    index=i;
+                                    break;
+                                }
+                            }
+                            vm.personList.splice(index,1);
+                        }());
+
+                        //_.remove(vm.personList,'id',person.id);
+                        $scope.$apply();
+                        break;
+                    default :
+                        console.log('default',xhr.readyState);
+                }
+            };
+            xhr.open("get", "http://a.a.a/fakeapi/person/delete?"+ $.param(person,true), true);
+
+            xhr.send(null);
+
+
+
+        };
+        vm.sortName=function(arr,way){
+            var campareName;
+            campareName=function(a,b){
+                return a.name.localeCompare(b.name);
+            };
+            arr.sort(campareName);
+            if(!way){
+                arr.reverse()
+            }
+
+            return
+        };
+        vm.sortAge=function(arr,way){
+            var campare;
+            campare=function(a,b){
+                return a.age-b.age;
+            };
+            arr.sort(campare);
+            if(!way){
+                arr.reverse()
+            }
+
+            return
+        };
+
+        vm.sortGender=function(arr,way){
+            var campare;
+            campare=function(a,b){
+                if(a.gender<b.gender){
+                    return -1;
+                }
+                if(a.gender>b.gender){
+                    return 1;
+                }
+                return 0;
+            };
+            arr.sort(campare);
+            if(!way){
+                arr.reverse();
+            }
+            return
+        };
+        vm.sortId=function(arr,way){
+            var campare;
+            campare=function(a,b){
+                if(a.id<b.id){
+                    return -1;
+                }
+                if(a.id>b.id){
+                    return 1;
+                }
+
+                return 0;
+            };
+            arr.sort(campare);
+            if(!way){
+                arr.reverse()
+            }
+            return
+        };
+
+//        console.log('iop;io','fghfgh'.localeCompare('gfhtr'));
+        init()
+
+
+    })
+
+
+}());
+
+
+</script>
+</body>
+</html>

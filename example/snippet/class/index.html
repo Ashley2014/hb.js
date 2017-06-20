@@ -19,12 +19,14 @@ class a {
 }
 
 class b extends a{
-    constructor(){
-        super()
+    constructor(name,r){
+        super(name)
+
+        this.aa=r
     }
 }
 
-console.log(new b(a,10))
+console.log(new b('',10))
 </script>
 
 </body>

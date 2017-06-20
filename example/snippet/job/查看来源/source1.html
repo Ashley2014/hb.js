@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    <li><a  href="http://localhost:63342/demo/example/jobjunk/%E6%9F%A5%E7%9C%8B%E6%9D%A5%E6%BA%90/source1.html">同域全路径</a></li>
+    <li><a  href="http://localhost/demo/example/jobjunk/%E6%9F%A5%E7%9C%8B%E6%9D%A5%E6%BA%90/source1.html">不同端口号</a></li>
+    <li><a  href="http://a.a.a/demo/example/jobjunk/%E6%9F%A5%E7%9C%8B%E6%9D%A5%E6%BA%90/source1.html">不同域名</a></li>
+</ul>
+<ul>
+    <li><a  href="http://localhost:63342/demo/example/jobjunk/%E6%9F%A5%E7%9C%8B%E6%9D%A5%E6%BA%90/statistics.html">同域全路径</a></li>
+    <li><span onclick="location.href='http://localhost:63342/demo/example/jobjunk/%E6%9F%A5%E7%9C%8B%E6%9D%A5%E6%BA%90/statistics.html'">同域全路径(用js)</span></li>
+    <li><a  href="http://localhost/demo/example/jobjunk/%E6%9F%A5%E7%9C%8B%E6%9D%A5%E6%BA%90/statistics.html">不同端口号</a></li>
+    <li><a  href="http://a.a.a/demo/example/jobjunk/%E6%9F%A5%E7%9C%8B%E6%9D%A5%E6%BA%90/statistics.html">不同域名</a></li>
+    <li><a  href="statistics.html">相对路径</a></li>
+    <li><a  href="http://localhost:1112">服务端接收的头部http</a></li>
+    <li><a  href="http://localhost:1113">服务端接收的头部express</a></li>
+</ul>
+<script>
+    (function(){
+        "use strict";
+        console.log('document.referrer即超链接来源',document.referrer);
+
+    }());
+</script>
+</body>
+</html>

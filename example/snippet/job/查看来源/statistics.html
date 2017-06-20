@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<span onclick="window.history.back();">history返回</span>
+<div>
+    <span id="push">push</span>
+    <span id="push2">push2</span>
+    <span id="push3">pushto1</span>
+</div>
+<script>
+
+    (function(){
+        "use strict";
+        var pushBt,pushBt2,pushBt3;
+        console.log('document.referrer即超链接来源',document.referrer);
+        console.log('window.location.hash',window.location.hash);
+        window.addEventListener("hashchange",function(){//not ie 8
+            console.log('onhashchange');
+            console.log('window.location.hash',window.location.hash);
+            console.log('document.referrer',document.referrer);
+        },false);
+
+        pushBt=document.getElementById("push");
+        pushBt2=document.getElementById("push2");
+        pushBt3=document.getElementById("push3");
+        pushBt.addEventListener("click",function() {
+            history.pushState({"push":"push"}, "ppp", "push.html");
+        });
+        pushBt2.addEventListener("click",function() {
+            history.pushState({"push":"push2"}, "ppp", "push2.html");
+        });
+        pushBt3.addEventListener("click",function() {
+            history.replaceState({push:"push"}, "push1","push.html")
+        });
+        window.addEventListener("popstate",function(event) {
+            console.log('onpopstate');
+            console.log(event.state);
+            console.log('document.referrer',document.referrer);
+
+        });
+
+
+
+
+    }());
+</script>
+</body>
+</html>

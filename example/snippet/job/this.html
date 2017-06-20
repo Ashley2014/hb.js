@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    (function(){
+      'use strict';
+        var obj1={
+            name:"peter",
+            age:"33",
+            gender:"male",
+            getName:function(){},
+            subObj:{
+                job:"coder",
+                getJob:function(){}
+            }
+        };
+        obj1.getName=function(){
+            console.log('getName this',this,this.name);
+        };
+
+        obj1.subObj.getJob=function(){
+            console.log('obj1.subObj.getJob this',this,this.job);
+        };
+        obj1.getName();
+        obj1.subObj.getJob();
+    }());
+
+    (function(){
+        "use strict";
+        window.name = "The Window";
+        var object = {
+            name : "My Object",
+            getNameFunc : function(){
+                console.log('this',this,'arguments',arguments);
+                return function(){
+                    console.log('this',this);//严格模式是undefined，非严格模式是window
+                    return this.name;
+                };
+            }
+        };
+        console.log(object.getNameFunc()()); //"The Window"（在非严格模式下）
+
+    }());
+
+</script>
+</body>
+</html>
